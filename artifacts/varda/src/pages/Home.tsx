@@ -36,32 +36,151 @@ type CarItem = {
 };
 
 const fleetData: CarItem[] = [
-  { id: "swift", name: "Swift", category: "Budget", image: "/budget.png", pricing: [{ type: "Manual", price: 1200 }, { type: "Auto", price: 1600 }], specs: { seats: 5, fuel: "Petrol", transmission: "Manual / Auto" }, tagline: "Nimble through narrow lanes" },
-  { id: "baleno", name: "Baleno", category: "Budget", image: "/budget.png", pricing: [{ type: "Manual", price: 1300 }, { type: "Auto", price: 1800 }], specs: { seats: 5, fuel: "Petrol", transmission: "Manual / Auto" }, tagline: "City glide, beach ready" },
-  { id: "dzire", name: "Dzire", category: "Budget", image: "/budget.png", pricing: [{ type: "Manual", price: 1400 }, { type: "Auto", price: 1800 }], specs: { seats: 5, fuel: "Petrol", transmission: "Manual / Auto" }, tagline: "Sedan comfort at every turn" },
-  { id: "i20", name: "i20", category: "Budget", image: "/budget.png", pricing: [{ type: "Manual", price: 1400 }, { type: "Auto", price: 1800 }, { type: "Sunroof", price: 2000 }], specs: { seats: 5, fuel: "Petrol", transmission: "Manual / Auto" }, tagline: "Open roof, open roads" },
-  { id: "fronx", name: "Fronx", category: "Budget", image: "/budget.png", pricing: [{ type: "Auto", price: 2000 }], specs: { seats: 5, fuel: "Petrol", transmission: "Automatic" }, tagline: "Compact crossover confidence" },
-  { id: "brezza", name: "Brezza", category: "Budget", image: "/budget.png", pricing: [{ type: "Manual", price: 2000 }], specs: { seats: 5, fuel: "Petrol", transmission: "Manual" }, tagline: "Bold stance, easy drive" },
+  // ── BUDGET ──────────────────────────────────────────────────────────────────
+  {
+    id: "swift", name: "Swift", category: "Budget",
+    image: "https://images.unsplash.com/photo-1609521263047-f8f205293f24?auto=format&fit=crop&w=800&h=450&q=80",
+    pricing: [{ type: "Manual", price: 1200 }, { type: "Auto", price: 1600 }],
+    specs: { seats: 5, fuel: "Petrol", transmission: "Manual / Auto" }, tagline: "Nimble through narrow lanes",
+  },
+  {
+    id: "baleno", name: "Baleno", category: "Budget",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&h=450&q=80",
+    pricing: [{ type: "Manual", price: 1300 }, { type: "Auto", price: 1800 }],
+    specs: { seats: 5, fuel: "Petrol", transmission: "Manual / Auto" }, tagline: "City glide, beach ready",
+  },
+  {
+    id: "dzire", name: "Dzire", category: "Budget",
+    image: "https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=800&h=450&q=80",
+    pricing: [{ type: "Manual", price: 1400 }, { type: "Auto", price: 1800 }],
+    specs: { seats: 5, fuel: "Petrol", transmission: "Manual / Auto" }, tagline: "Sedan comfort at every turn",
+  },
+  {
+    id: "i20", name: "i20", category: "Budget",
+    image: "https://images.unsplash.com/photo-1550355291-bbee04a92027?auto=format&fit=crop&w=800&h=450&q=80",
+    pricing: [{ type: "Manual", price: 1400 }, { type: "Auto", price: 1800 }, { type: "Sunroof", price: 2000 }],
+    specs: { seats: 5, fuel: "Petrol", transmission: "Manual / Auto" }, tagline: "Open roof, open roads",
+  },
+  {
+    id: "fronx", name: "Fronx", category: "Budget",
+    image: "https://images.unsplash.com/photo-1612825173281-9a193378527e?auto=format&fit=crop&w=800&h=450&q=80",
+    pricing: [{ type: "Auto", price: 2000 }],
+    specs: { seats: 5, fuel: "Petrol", transmission: "Automatic" }, tagline: "Compact crossover confidence",
+  },
+  {
+    id: "brezza", name: "Brezza", category: "Budget",
+    image: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=800&h=450&q=80",
+    pricing: [{ type: "Manual", price: 2000 }],
+    specs: { seats: 5, fuel: "Petrol", transmission: "Manual" }, tagline: "Bold stance, easy drive",
+  },
 
-  { id: "venue", name: "Venue", category: "SUV", image: "/suv.png", pricing: [{ type: "Manual", price: 2500 }, { type: "Auto", price: 3000 }], specs: { seats: 5, fuel: "Petrol / Diesel", transmission: "Manual / Auto" }, tagline: "Urban SUV, coastal soul" },
-  { id: "creta", name: "Creta", category: "SUV", image: "/suv.png", pricing: [{ type: "Manual", price: 2500 }, { type: "Auto", price: 3500 }], specs: { seats: 5, fuel: "Petrol / Diesel", transmission: "Manual / Auto" }, tagline: "Goa's favourite all-rounder" },
-  { id: "seltos", name: "Seltos", category: "SUV", image: "/suv.png", pricing: [{ type: "Auto", price: 3000 }], specs: { seats: 5, fuel: "Petrol / Diesel", transmission: "Automatic" }, tagline: "Premium ride, every road" },
-  { id: "alcazar", name: "Alcazar", category: "SUV", image: "/suv.png", pricing: [{ type: "Auto", price: 3500 }], specs: { seats: 6, fuel: "Diesel", transmission: "Automatic" }, tagline: "Six in comfort, none left behind" },
-  { id: "hycross", name: "Hycross", category: "SUV", image: "/suv.png", pricing: [{ type: "Auto", price: 3500 }], specs: { seats: 7, fuel: "Hybrid", transmission: "Automatic" }, tagline: "Seven seats, green conscience" },
-  { id: "carens", name: "Carens", category: "SUV", image: "/suv.png", pricing: [{ type: "Manual", price: 2500 }], specs: { seats: 7, fuel: "Diesel", transmission: "Manual" }, tagline: "Family adventures, fully loaded" },
-  { id: "ertiga", name: "Ertiga", category: "SUV", image: "/suv.png", pricing: [{ type: "Manual", price: 2300 }, { type: "Auto", price: 2800 }], specs: { seats: 7, fuel: "Petrol / CNG", transmission: "Manual / Auto" }, tagline: "The practical family choice" },
+  // ── SUVs ─────────────────────────────────────────────────────────────────────
+  {
+    id: "venue", name: "Venue", category: "SUV",
+    image: "https://images.unsplash.com/photo-1619405399517-d7fce0f13302?auto=format&fit=crop&w=800&h=450&q=80",
+    pricing: [{ type: "Manual", price: 2500 }, { type: "Auto", price: 3000 }],
+    specs: { seats: 5, fuel: "Petrol / Diesel", transmission: "Manual / Auto" }, tagline: "Urban SUV, coastal soul",
+  },
+  {
+    id: "creta", name: "Creta", category: "SUV",
+    image: "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&w=800&h=450&q=80",
+    pricing: [{ type: "Manual", price: 2500 }, { type: "Auto", price: 3500 }],
+    specs: { seats: 5, fuel: "Petrol / Diesel", transmission: "Manual / Auto" }, tagline: "Goa's favourite all-rounder",
+  },
+  {
+    id: "seltos", name: "Seltos", category: "SUV",
+    image: "https://images.unsplash.com/photo-1625047509168-a7026f36de04?auto=format&fit=crop&w=800&h=450&q=80",
+    pricing: [{ type: "Auto", price: 3000 }],
+    specs: { seats: 5, fuel: "Petrol / Diesel", transmission: "Automatic" }, tagline: "Premium ride, every road",
+  },
+  {
+    id: "alcazar", name: "Alcazar", category: "SUV",
+    image: "https://images.unsplash.com/photo-1605559911160-a3d95d213904?auto=format&fit=crop&w=800&h=450&q=80",
+    pricing: [{ type: "Auto", price: 3500 }],
+    specs: { seats: 6, fuel: "Diesel", transmission: "Automatic" }, tagline: "Six in comfort, none left behind",
+  },
+  {
+    id: "hycross", name: "Hycross", category: "SUV",
+    image: "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=800&h=450&q=80",
+    pricing: [{ type: "Auto", price: 3500 }],
+    specs: { seats: 7, fuel: "Hybrid", transmission: "Automatic" }, tagline: "Seven seats, green conscience",
+  },
+  {
+    id: "carens", name: "Carens", category: "SUV",
+    image: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=800&h=450&q=80",
+    pricing: [{ type: "Manual", price: 2500 }],
+    specs: { seats: 7, fuel: "Diesel", transmission: "Manual" }, tagline: "Family adventures, fully loaded",
+  },
+  {
+    id: "ertiga", name: "Ertiga", category: "SUV",
+    image: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=800&h=450&q=80",
+    pricing: [{ type: "Manual", price: 2300 }, { type: "Auto", price: 2800 }],
+    specs: { seats: 7, fuel: "Petrol / CNG", transmission: "Manual / Auto" }, tagline: "The practical family choice",
+  },
 
-  { id: "thar", name: "Thar", category: "Premium", image: "/premium.png", pricing: [{ type: "Manual", price: 3000 }, { type: "Auto", price: 3500 }], specs: { seats: 4, fuel: "Diesel", transmission: "Manual / Auto" }, tagline: "Born for the untamed Ghats" },
-  { id: "thar-roxx", name: "Thar Roxx", category: "Premium", image: "/premium.png", pricing: [{ type: "Base", price: 6000 }], specs: { seats: 5, fuel: "Diesel", transmission: "Automatic" }, tagline: "Roxx harder, roam freer" },
-  { id: "crysta", name: "Crysta", category: "Premium", image: "/premium.png", pricing: [{ type: "Manual", price: 3000 }, { type: "Auto", price: 3500 }], specs: { seats: 7, fuel: "Diesel", transmission: "Manual / Auto" }, tagline: "Corporate comfort, Goa style" },
-  { id: "fortuner", name: "Fortuner", category: "Premium", image: "/premium.png", pricing: [{ type: "Base", price: 7000 }], specs: { seats: 7, fuel: "Diesel", transmission: "Automatic" }, tagline: "Command every road you take" },
-  { id: "legender", name: "Legender", category: "Premium", image: "/premium.png", pricing: [{ type: "Base", price: 8000 }], specs: { seats: 7, fuel: "Diesel", transmission: "Automatic" }, tagline: "The legend, elevated" },
+  // ── PREMIUM / OFF-ROAD ───────────────────────────────────────────────────────
+  {
+    id: "thar", name: "Thar", category: "Premium",
+    image: "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&w=800&h=450&q=80",
+    pricing: [{ type: "Manual", price: 3000 }, { type: "Auto", price: 3500 }],
+    specs: { seats: 4, fuel: "Diesel", transmission: "Manual / Auto" }, tagline: "Born for the untamed Ghats",
+  },
+  {
+    id: "thar-roxx", name: "Thar Roxx", category: "Premium",
+    image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&h=450&q=80",
+    pricing: [{ type: "Base", price: 6000 }],
+    specs: { seats: 5, fuel: "Diesel", transmission: "Automatic" }, tagline: "Roxx harder, roam freer",
+  },
+  {
+    id: "crysta", name: "Crysta", category: "Premium",
+    image: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&h=450&q=80",
+    pricing: [{ type: "Manual", price: 3000 }, { type: "Auto", price: 3500 }],
+    specs: { seats: 7, fuel: "Diesel", transmission: "Manual / Auto" }, tagline: "Corporate comfort, Goa style",
+  },
+  {
+    id: "fortuner", name: "Fortuner", category: "Premium",
+    image: "https://images.unsplash.com/photo-1571127236794-81c0bbfe1ce3?auto=format&fit=crop&w=800&h=450&q=80",
+    pricing: [{ type: "Base", price: 7000 }],
+    specs: { seats: 7, fuel: "Diesel", transmission: "Automatic" }, tagline: "Command every road you take",
+  },
+  {
+    id: "legender", name: "Legender", category: "Premium",
+    image: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=800&h=450&q=80",
+    pricing: [{ type: "Base", price: 8000 }],
+    specs: { seats: 7, fuel: "Diesel", transmission: "Automatic" }, tagline: "The legend, elevated",
+  },
 
-  { id: "bmw-5", name: "BMW 5 Series", category: "Luxury", image: "/luxury.png", pricing: [{ type: "Base", price: 15000 }], specs: { seats: 5, fuel: "Petrol", transmission: "Automatic" }, tagline: "The ultimate driving machine" },
-  { id: "mini", name: "Mini Cooper", category: "Luxury", image: "/luxury.png", pricing: [{ type: "Base", price: 18000 }], specs: { seats: 4, fuel: "Petrol", transmission: "Automatic" }, tagline: "British icon, Goan spirit" },
-  { id: "audi-conv", name: "Audi Convertible", category: "Luxury", image: "/luxury.png", pricing: [{ type: "Base", price: 26000 }], specs: { seats: 4, fuel: "Petrol", transmission: "Automatic" }, tagline: "Open sky, open throttle" },
-  { id: "merc-c300", name: "Mercedes C300", category: "Luxury", image: "/luxury.png", pricing: [{ type: "Base", price: 34000 }], specs: { seats: 5, fuel: "Petrol", transmission: "Automatic" }, tagline: "Where precision meets prestige" },
-  { id: "bmw-z4", name: "BMW Z4", category: "Luxury", image: "/luxury.png", pricing: [{ type: "Base", price: 30000 }], specs: { seats: 2, fuel: "Petrol", transmission: "Automatic" }, tagline: "Two seats. Zero inhibitions." },
+  // ── LUXURY ───────────────────────────────────────────────────────────────────
+  {
+    id: "bmw-5", name: "BMW 5 Series", category: "Luxury",
+    image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&h=450&q=80",
+    pricing: [{ type: "Base", price: 15000 }],
+    specs: { seats: 5, fuel: "Petrol", transmission: "Automatic" }, tagline: "The ultimate driving machine",
+  },
+  {
+    id: "mini", name: "Mini Cooper", category: "Luxury",
+    image: "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=800&h=450&q=80",
+    pricing: [{ type: "Base", price: 18000 }],
+    specs: { seats: 4, fuel: "Petrol", transmission: "Automatic" }, tagline: "British icon, Goan spirit",
+  },
+  {
+    id: "audi-conv", name: "Audi Convertible", category: "Luxury",
+    image: "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=800&h=450&q=80",
+    pricing: [{ type: "Base", price: 26000 }],
+    specs: { seats: 4, fuel: "Petrol", transmission: "Automatic" }, tagline: "Open sky, open throttle",
+  },
+  {
+    id: "merc-c300", name: "Mercedes C300", category: "Luxury",
+    image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&h=450&q=80",
+    pricing: [{ type: "Base", price: 34000 }],
+    specs: { seats: 5, fuel: "Petrol", transmission: "Automatic" }, tagline: "Where precision meets prestige",
+  },
+  {
+    id: "bmw-z4", name: "BMW Z4", category: "Luxury",
+    image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&h=450&q=80",
+    pricing: [{ type: "Base", price: 30000 }],
+    specs: { seats: 2, fuel: "Petrol", transmission: "Automatic" }, tagline: "Two seats. Zero inhibitions.",
+  },
 ];
 
 const heritageData = [
@@ -358,7 +477,7 @@ export default function Home() {
                 className="group text-left bg-neutral-950 p-0 overflow-hidden"
               >
                 {/* Image */}
-                <div className="aspect-[4/3] relative overflow-hidden bg-neutral-900">
+                <div className="aspect-video relative overflow-hidden bg-neutral-900">
                   <img
                     src={car.image}
                     alt={car.name}
