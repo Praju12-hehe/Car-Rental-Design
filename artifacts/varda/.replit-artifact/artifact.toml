@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Varda Car Rental"
+version = "1.0.0"
+id = "artifacts/varda"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23252
+
+[services.development]
+run = "pnpm --filter @workspace/varda run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/varda", "run", "build" ]
+publicDir = "artifacts/varda/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23252"
+BASE_PATH = "/"

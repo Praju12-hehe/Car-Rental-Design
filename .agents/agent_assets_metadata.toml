@@ -1,0 +1,32 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "Utn9Rj7ZmLl60X3Wbu0tU"
+uri = "file://artifacts/varda/public/hero.png"
+type = "image"
+title = "cinematic luxury car front"
+
+[[generated]]
+id = "BRXc2NjT6Sc4qjWej-Rdo"
+uri = "file://artifacts/varda/public/budget.png"
+type = "image"
+title = "budget hatchback i20"
+
+[[generated]]
+id = "hyMvhRdjYTA0cMK9cXAlE"
+uri = "file://artifacts/varda/public/suv.png"
+type = "image"
+title = "premium suv creta"
+
+[[generated]]
+id = "7AzaLCPs0ilrveRJlQcWY"
+uri = "file://artifacts/varda/public/premium.png"
+type = "image"
+title = "offroad premium suv fortuner"
+
+[[generated]]
+id = "-G9-tq_-NYeP2KyPnxkQb"
+uri = "file://artifacts/varda/public/luxury.png"
+type = "image"
+title = "luxury sedan mercedes"

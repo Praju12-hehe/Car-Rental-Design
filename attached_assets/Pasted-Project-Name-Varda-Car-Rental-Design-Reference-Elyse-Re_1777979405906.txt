@@ -1,0 +1,57 @@
+Project Name: Varda Car Rental
+
+Design Reference: Elyse Residence Luxury Real Estate (High-end typography, fluid scroll animations, expansive whitespace, and premium image reveals).
+
+Core Objective: Build a luxury car rental web application with a sophisticated animation engine and a deep-link WhatsApp booking system.
+
+1. Technical Stack & Visual Style:
+
+Tech: HTML5, Tailwind CSS, Framer Motion, and Lucide Icons.
+
+Aesthetic: Follow the "Elyse Residence" Dribbble reference: use elegant serif headings, smooth parallax scrolling, and refined hover states.
+
+Glassmorphism: Use semi-transparent, blurred backgrounds for UI cards and the sticky navigation bar.
+
+2. Dynamic Features:
+
+Product Detail View (Flipkart-style): When a user clicks a car card, do not navigate to a new page. Instead, open a sleek, full-screen overlay or a "drawer" containing:
+
+High-resolution car image gallery.
+
+Specifications: Seating capacity, fuel type, and transmission.
+
+Detailed pricing (Manual vs. Auto).
+
+A persistent "Book via WhatsApp" button specific to that car.
+
+Advanced Booking Window: A dedicated booking modal featuring:
+
+Input fields for Name, Pickup Place, and Drop Place.
+
+An interactive Calendar Picker for dates and a Time Picker.
+
+A "Confirm & Send to WhatsApp" button that compiles all these inputs into a pre-filled WhatsApp message to 7666357013.
+
+3. Website Sections:
+
+Hero Section: Animated reveal of "Premium Wheels for Your Goa Journey."
+
+The Fleet: Categorized grid (Budget, SUV, Premium, Luxury) using the following data:
+
+Budget: Swift (M: 1200, A: 1600), Baleno (M: 1300, A: 1800), Dzire (M: 1400, A: 1800), i20 (M: 1400, A: 1800, Sunroof: 2000), Fronx (A: 2000), Brezza (M: 2000).
+
+SUVs: Venue (M: 2500, A: 3000), Creta (M: 2500, A: 3500), Seltos (A: 3000), Alcazar (A: 3500), Hycross (A: 3500), Carens (M: 2500), Ertiga (M: 2300, A: 2800).
+
+Premium/Off-road: Thar (M: 3000, A: 3500), Thar Roxx (6000), Crysta (M: 3000, A: 3500), Fortuner (7000), Legender (8000).
+
+Luxury: BMW 5 Series (15,000), Mini Cooper (18,000), Audi Conv (26,000), Mercedes C300 (34,000), BMW Z4 (30,000).
+
+Goa Heritage Guide: Animated cards for "Hidden Goa" (Temples, Heritage, Directions) with Google Maps integration.
+
+Footer: Terms & Services, Contact: 7666357013, Email: vardaa1223@gmail.com.
+
+4. Interactivity:
+
+Implement smooth-scroll (Lenis or similar feel).
+
+Add image "reveal" animations as the user scrolls down, matching the luxury real estate reference.
