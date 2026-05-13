@@ -30,3 +30,63 @@ id = "-G9-tq_-NYeP2KyPnxkQb"
 uri = "file://artifacts/varda/public/luxury.png"
 type = "image"
 title = "luxury sedan mercedes"
+
+[[generated]]
+id = "mScO6-maqkttMK3dsk8Wh"
+uri = "file://artifacts/varda/public/cars/seltos.png"
+type = "image"
+title = "kia seltos suv"
+
+[[generated]]
+id = "a-WaxZDR3VNukBmvHkcv2"
+uri = "file://artifacts/varda/public/cars/alcazar.png"
+type = "image"
+title = "hyundai alcazar 6 seat suv"
+
+[[generated]]
+id = "HwpSOL1NCle0UjBcR3DJv"
+uri = "file://artifacts/varda/public/cars/hycross.png"
+type = "image"
+title = "toyota hycross hybrid suv"
+
+[[generated]]
+id = "zpzhBG_9nxA-g-PXli7x5"
+uri = "file://artifacts/varda/public/cars/fortuner.png"
+type = "image"
+title = "toyota fortuner large suv"
+
+[[generated]]
+id = "rxFr15p0EUmnhbQBZOnTl"
+uri = "file://artifacts/varda/public/cars/carens.png"
+type = "image"
+title = "kia carens 7 seat mpv"
+
+[[generated]]
+id = "meMmMWBmUeybFpL7U0PMG"
+uri = "file://artifacts/varda/public/cars/legender.png"
+type = "image"
+title = "fortuner legender black premium"
+
+[[generated]]
+id = "1-vYbeIw-RMXJdMqDfPvU"
+uri = "file://artifacts/varda/public/cars/ertiga.png"
+type = "image"
+title = "maruti ertiga mpv white"
+
+[[generated]]
+id = "Wh51f5GxaM7gDlv4ZuYQt"
+uri = "file://artifacts/varda/public/cars/bmw-5.png"
+type = "image"
+title = "bmw 5 series sedan white"
+
+[[generated]]
+id = "qNLC5YnlzHHh1V5u-rf-Z"
+uri = "file://artifacts/varda/public/cars/thar-roxx.png"
+type = "image"
+title = "mahindra thar roxx 5 door"
+
+[[generated]]
+id = "M6wrCGEcTbA_xk3xMnf3A"
+uri = "file://artifacts/varda/public/cars/crysta.png"
+type = "image"
+title = "toyota innova crysta mpv"
