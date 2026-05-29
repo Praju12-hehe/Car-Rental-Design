@@ -238,6 +238,25 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-neutral-950 text-white overflow-x-hidden font-sans">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CarRental",
+          name: "Varda Car Rentals",
+          url: "https://varda.example.com/",
+          description: "Premium cab rental and self-drive car hire in Goa for airport transfers, sightseeing, beach trips, and wedding travel.",
+          areaServed: ["Goa", "North Goa", "South Goa", "Dabolim Airport", "Panaji"],
+          telephone: "+91-9371548253",
+          priceRange: "₹1200 - ₹34000",
+          sameAs: ["https://www.instagram.com/"],
+          availableService: [
+            "Cab rental in Goa",
+            "Self-drive car rental in Goa",
+            "Airport transfer in Goa",
+            "Goa sightseeing car hire"
+          ]
+        })
+      }} />
 
       {/* ── NAV ────────────────────────────────────────────────────────────── */}
       <header className="fixed top-0 left-0 right-0 z-50">
@@ -350,8 +369,8 @@ export default function Home() {
             transition={{ duration: 1, delay: 0.2 }}
             className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif font-medium leading-[1.0] tracking-tight text-white max-w-3xl mb-6"
           >
-            Premium Wheels for<br />
-            Your <em className="not-italic italic">Goa</em> Journey.
+            Rent a Cab in Goa<br />
+            with Premium Self-Drive Car Rentals.
           </motion.h1>
 
           {/* Subtitle */}
@@ -361,8 +380,7 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="text-sm md:text-base text-white/55 font-light max-w-md mb-10 leading-relaxed"
           >
-            From spirited hatchbacks weaving through Fontainhas to convertibles
-            cruising the coast — drive Goa the way it deserves to be driven.
+            Book a cab in Goa, airport transfer, or self-drive car rental for beach trips, hill drives, sightseeing, and wedding travel.
           </motion.p>
 
           {/* CTAs */}
