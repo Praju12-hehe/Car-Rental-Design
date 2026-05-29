@@ -159,25 +159,25 @@ const fleetData: CarItem[] = [
   },
   {
     id: "mini", name: "Mini Cooper", category: "Luxury",
-    image: "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=800&h=450&q=80",
+    image: "/cars/mini.png",
     pricing: [{ type: "Base", price: 18000 }],
     specs: { seats: 4, fuel: "Petrol", transmission: "Automatic" }, tagline: "British icon, Goan spirit",
   },
   {
     id: "audi-conv", name: "Audi Convertible", category: "Luxury",
-    image: "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=800&h=450&q=80",
+    image: "/cars/audi-conv.png",
     pricing: [{ type: "Base", price: 26000 }],
     specs: { seats: 4, fuel: "Petrol", transmission: "Automatic" }, tagline: "Open sky, open throttle",
   },
   {
     id: "merc-c300", name: "Mercedes C300", category: "Luxury",
-    image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&h=450&q=80",
+    image: "/cars/merc-c300.png",
     pricing: [{ type: "Base", price: 34000 }],
     specs: { seats: 5, fuel: "Petrol", transmission: "Automatic" }, tagline: "Where precision meets prestige",
   },
   {
     id: "bmw-z4", name: "BMW Z4", category: "Luxury",
-    image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&h=450&q=80",
+    image: "/cars/bmw-z4.png",
     pricing: [{ type: "Base", price: 30000 }],
     specs: { seats: 2, fuel: "Petrol", transmission: "Automatic" }, tagline: "Two seats. Zero inhibitions.",
   },
@@ -185,8 +185,6 @@ const fleetData: CarItem[] = [
 
 const heritageData = [
   { title: "Shri Mangeshi Temple", category: "Temples", description: "The largest and most visited temple in Goa, dedicated to Lord Mangesh.", link: "https://maps.google.com/?q=Shri+Mangeshi+Temple+Goa", image: "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=800&q=80" },
-  { title: "Basilica of Bom Jesus", category: "Heritage", description: "A UNESCO World Heritage Site housing the mortal remains of St. Francis Xavier.", link: "https://maps.google.com/?q=Basilica+of+Bom+Jesus+Goa", image: "https://images.unsplash.com/photo-1555523910-40e1b1d4dd06?auto=format&fit=crop&w=800&q=80" },
-  { title: "Fort Aguada", category: "Heritage", description: "A 17th-century Portuguese fort with a panoramic lighthouse overlooking the sea.", link: "https://maps.google.com/?q=Fort+Aguada+Goa", image: "https://images.unsplash.com/photo-1512343879784-a960bf40e4f2?auto=format&fit=crop&w=800&q=80" },
   { title: "Dudhsagar Waterfalls", category: "Directions", description: "One of India's tallest waterfalls, best reached by a scenic jungle drive.", link: "https://maps.google.com/?q=Dudhsagar+Waterfalls+Goa", image: "https://images.unsplash.com/photo-1579975096649-e773152b04cb?auto=format&fit=crop&w=800&q=80" },
 ];
 
@@ -197,7 +195,7 @@ const bookingSchema = z.object({
   pickupPlace: z.string().min(2, "Pickup location is required"),
   dropPlace: z.string().min(2, "Drop location is required"),
   date: z.date({ required_error: "Date is required" }),
-  time: z.string().min(1, "Time is required"),
+  time: z.string().optional(),
 });
 type BookingFormValues = z.infer<typeof bookingSchema>;
 
@@ -210,7 +208,7 @@ export default function Home() {
   const [bookingOpen, setBookingOpen] = useState(false);
 
   const heroRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"], layoutEffect: false });
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
@@ -221,8 +219,9 @@ export default function Home() {
 
   const onSubmit = (data: BookingFormValues) => {
     const car = activeCar?.name ? `*Car:* ${activeCar.name}%0A` : "";
-    const msg = `*New Booking — Varda Car Rentals*%0A%0A*Name:* ${encodeURIComponent(data.name)}%0A${car}*Pickup:* ${encodeURIComponent(data.pickupPlace)}%0A*Drop:* ${encodeURIComponent(data.dropPlace)}%0A*Date:* ${format(data.date, "PPP")}%0A*Time:* ${encodeURIComponent(data.time)}`;
-    window.open(`https://wa.me/917666357013?text=${msg}`, "_blank");
+    const timeLine = data.time ? `*Time:* ${encodeURIComponent(data.time)}%0A` : "";
+    const msg = `*New Booking — Varda Car Rentals*%0A%0A*Name:* ${encodeURIComponent(data.name)}%0A${car}*Pickup:* ${encodeURIComponent(data.pickupPlace)}%0A*Drop:* ${encodeURIComponent(data.dropPlace)}%0A*Date:* ${format(data.date, "PPP")}%0A${timeLine}`;
+    window.open(`https://wa.me/919371548253?text=${msg}`, "_blank");
     setBookingOpen(false);
     form.reset();
   };
@@ -685,7 +684,7 @@ export default function Home() {
                   name="time"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/40">Time</FormLabel>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/40">Time (optional)</FormLabel>
                       <FormControl>
                         <Input
                           type="time"
@@ -833,7 +832,11 @@ export default function Home() {
             <div id="contact-details">
               <p className="text-[10px] uppercase tracking-[0.25em] text-white/30 mb-6">Contact</p>
               <div className="space-y-4">
-                <a href="tel:7666357013" data-testid="link-phone" className="flex items-center gap-3 text-sm text-white/50 hover:text-white transition-colors group">
+                <a href="tel:9371548253" data-testid="link-phone" className="flex items-center gap-3 text-sm text-white/50 hover:text-white transition-colors group">
+                  <Phone size={13} className="text-white/30 group-hover:text-white/60 transition-colors" />
+                  9371548253
+                </a>
+                <a href="tel:7666357013" data-testid="link-phone-alt" className="flex items-center gap-3 text-sm text-white/50 hover:text-white transition-colors group">
                   <Phone size={13} className="text-white/30 group-hover:text-white/60 transition-colors" />
                   7666357013
                 </a>
