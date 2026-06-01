@@ -263,8 +263,11 @@ export default function Home() {
         <div className="max-w-screen-xl mx-auto px-6 md:px-10 h-16 md:h-20 flex items-center justify-between">
 
           {/* Logo */}
-          <button onClick={() => scrollTo("hero")} className="flex items-baseline gap-1.5 group">
-            <span className="text-2xl md:text-3xl font-serif text-white tracking-tight group-hover:opacity-80 transition-opacity">Varda</span>
+          <button onClick={() => scrollTo("hero")} className="flex items-center gap-3 group">
+            <picture>
+              <source srcSet="/logo-256.webp" type="image/webp" />
+              <img src="/logo.svg" alt="Varda Car Rentals" className="h-8 md:h-10 w-auto block" style={{objectFit: 'contain'}} />
+            </picture>
             <span className="text-[10px] font-sans uppercase tracking-[0.25em] text-white/50 group-hover:text-white/70 transition-colors">GOA</span>
           </button>
 
@@ -839,7 +842,12 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 mb-16">
             {/* Brand */}
             <div>
-              <p className="text-2xl font-serif text-white mb-1">Varda</p>
+              <div className="flex items-center gap-3 mb-2">
+                <picture>
+                  <source srcSet="/logo-256.webp" type="image/webp" />
+                  <img src="/logo.svg" alt="Varda Car Rentals" className="h-10 w-auto block" style={{objectFit: 'contain'}} />
+                </picture>
+              </div>
               <p className="text-[10px] uppercase tracking-[0.3em] text-white/30 mb-5">Car Rentals &middot; Goa</p>
               <p className="text-xs text-white/35 leading-relaxed max-w-xs">
                 Premium car rentals for discerning travellers exploring Goa's coastline, heritage, and wilderness.
@@ -888,9 +896,12 @@ export default function Home() {
               &copy; {new Date().getFullYear()} Varda Car Rentals. All rights reserved.
             </p>
             <div className="flex gap-6">
-              {["Terms of Service", "Privacy Policy"].map((item) => (
-                <a key={item} href="#" className="text-[11px] text-white/25 hover:text-white/50 transition-colors uppercase tracking-wider">
-                  {item}
+              {[
+                { label: "Terms & Conditions", href: "/terms-and-conditions" },
+                { label: "Privacy Policy", href: "/privacy-policy" },
+              ].map((item) => (
+                <a key={item.label} href={item.href} className="text-[11px] text-white/25 hover:text-white/50 transition-colors uppercase tracking-wider">
+                  {item.label}
                 </a>
               ))}
             </div>
