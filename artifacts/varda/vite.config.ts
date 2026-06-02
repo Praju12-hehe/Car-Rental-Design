@@ -24,7 +24,7 @@ export default defineConfig({
   root: path.resolve(import.meta.dirname),
 
   build: {
-    outDir: path.resolve(import.meta.dirname, "../../.vercel/output/static"),
+    outDir: "dist",
     emptyOutDir: true,
     chunkSizeWarningLimit: 1000,
     sourcemap: false,

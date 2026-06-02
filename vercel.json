@@ -1,6 +1,7 @@
 {
   "buildCommand": "pnpm install && pnpm run build",
   "installCommand": "pnpm install",
+  "outputDirectory": "artifacts/varda/dist",
   "build": {
     "env": {
       "PORT": "5173",
