@@ -27,6 +27,7 @@ export default defineConfig({
     outDir: path.resolve(import.meta.dirname, "../../.vercel/output/static"),
     emptyOutDir: true,
     chunkSizeWarningLimit: 1000,
+    sourcemap: false,
     rollupOptions: {
       output: {
         manualChunks(id) {
