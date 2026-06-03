@@ -193,10 +193,16 @@ const CATEGORIES = ["Budget", "SUV", "Premium", "Luxury"] as const;
 
 const bookingSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
+  contacts: z.string().min(7, "Contact number is required"),
+  altContact: z.string().optional(),
+  days: z.number().min(1).optional(),
+  transmission: z.enum(["Automatic", "Manual", "Any"]).optional(),
   pickupPlace: z.string().min(2, "Pickup location is required"),
   dropPlace: z.string().min(2, "Drop location is required"),
-  date: z.date({ required_error: "Date is required" }),
-  time: z.string().optional(),
+  pickupDate: z.date({ required_error: "Pickup date is required" }),
+  pickupTime: z.string().optional(),
+  dropDate: z.date().optional(),
+  dropTime: z.string().optional(),
 });
 type BookingFormValues = z.infer<typeof bookingSchema>;
 
@@ -215,13 +221,35 @@ export default function Home() {
 
   const form = useForm<BookingFormValues>({
     resolver: zodResolver(bookingSchema),
-    defaultValues: { name: "", pickupPlace: "", dropPlace: "", time: "" },
+    defaultValues: {
+      name: "",
+      contacts: "",
+      altContact: "",
+      days: 2,
+      transmission: "Any",
+      pickupPlace: "",
+      dropPlace: "",
+      pickupDate: new Date(),
+      pickupTime: "",
+      dropDate: undefined,
+      dropTime: "",
+    },
   });
 
   const onSubmit = (data: BookingFormValues) => {
-    const car = activeCar?.name ? `*Car:* ${activeCar.name}%0A` : "";
-    const timeLine = data.time ? `*Time:* ${encodeURIComponent(data.time)}%0A` : "";
-    const msg = `*New Booking — Varda Car Rentals*%0A%0A*Name:* ${encodeURIComponent(data.name)}%0A${car}*Pickup:* ${encodeURIComponent(data.pickupPlace)}%0A*Drop:* ${encodeURIComponent(data.dropPlace)}%0A*Date:* ${format(data.date, "PPP")}%0A${timeLine}`;
+    const carName = activeCar?.name ? activeCar.name : "";
+    const carSpecTransmission = activeCar?.specs?.transmission ?? "";
+    const chosenTransmission = data.transmission && data.transmission !== "Any" ? data.transmission : carSpecTransmission || "Any";
+
+    const pickupDateStr = data.pickupDate ? format(data.pickupDate, "PPP") : "";
+    const dropDateStr = data.dropDate ? format(data.dropDate, "PPP") : "";
+
+    const msg = `*Thank you for contacting VARDA CAR  RENTAL GOA! Please let us know how we can help you.*%0A%0A*New Booking -Varda Car Rentals*%0A%0A- Name : ${encodeURIComponent(
+      data.name
+    )}%0A- Contacts: ${encodeURIComponent(data.contacts)}%0A- Alternate contact : ${encodeURIComponent(data.altContact || "")} %0A- Days : ${encodeURIComponent(String(data.days || ""))}%0A- Car Auto & Manual: ${encodeURIComponent(
+      `${carName ? carName + " · " : ""}${chosenTransmission}`
+    )}%0A- Pickup location : ${encodeURIComponent(data.pickupPlace)}%0A- Date : ${encodeURIComponent(pickupDateStr)}%0A- Time : ${encodeURIComponent(data.pickupTime || "")}%0A- Drop location: ${encodeURIComponent(data.dropPlace)}%0A- Date: ${encodeURIComponent(dropDateStr)}%0A- Time : ${encodeURIComponent(data.dropTime || "")}%0A%0ANote:- Minimum 2 days booking is required to rent all self drive vehicles from us.%0AWe Don't Provide Self Drive Cars For 1 Day...%0A%0AFor Booking Enquiry : %0AContact us : 9371548253 / 7666357013%0AThankyou ...`;
+
     window.open(`https://wa.me/919371548253?text=${msg}`, "_blank");
     setBookingOpen(false);
     form.reset();
@@ -635,6 +663,35 @@ export default function Home() {
               <div className="grid grid-cols-2 gap-4">
                 <FormField
                   control={form.control}
+                  name="contacts"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/40">Contact</FormLabel>
+                      <FormControl>
+                        <Input data-testid="input-contacts" placeholder="Primary contact number" className="bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40" {...field} />
+                      </FormControl>
+                      <FormMessage className="text-xs" />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="altContact"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/40">Alternate contact (optional)</FormLabel>
+                      <FormControl>
+                        <Input data-testid="input-alt-contact" placeholder="Alternate contact" className="bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40" {...field} />
+                      </FormControl>
+                      <FormMessage className="text-xs" />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <FormField
+                  control={form.control}
                   name="pickupPlace"
                   render={({ field }) => (
                     <FormItem>
@@ -666,18 +723,19 @@ export default function Home() {
                   )}
                 />
               </div>
+
               <div className="grid grid-cols-2 gap-4">
                 <FormField
                   control={form.control}
-                  name="date"
+                  name="pickupDate"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/40">Date</FormLabel>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/40">Pickup Date</FormLabel>
                       <Popover>
                         <PopoverTrigger asChild>
                           <FormControl>
                             <button
-                              data-testid="button-date-picker"
+                              data-testid="button-pickup-date-picker"
                               type="button"
                               className={cn(
                                 "w-full h-9 px-3 text-left text-sm bg-white/5 border border-white/10 text-white rounded-none hover:bg-white/10 transition-colors",
@@ -705,17 +763,107 @@ export default function Home() {
                 />
                 <FormField
                   control={form.control}
-                  name="time"
+                  name="pickupTime"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/40">Time (optional)</FormLabel>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/40">Pickup Time (optional)</FormLabel>
                       <FormControl>
                         <Input
                           type="time"
-                          data-testid="input-time"
+                          data-testid="input-pickup-time"
                           className="bg-white/5 border-white/10 text-white rounded-none focus-visible:ring-0 focus-visible:border-white/40 [color-scheme:dark]"
                           {...field}
                         />
+                      </FormControl>
+                      <FormMessage className="text-xs" />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <FormField
+                  control={form.control}
+                  name="dropDate"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/40">Drop Date (optional)</FormLabel>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <FormControl>
+                            <button
+                              data-testid="button-drop-date-picker"
+                              type="button"
+                              className={cn(
+                                "w-full h-9 px-3 text-left text-sm bg-white/5 border border-white/10 text-white rounded-none hover:bg-white/10 transition-colors",
+                                !field.value && "text-white/30"
+                              )}
+                            >
+                              {field.value ? format(field.value, "dd MMM yy") : "Pick date"}
+                            </button>
+                          </FormControl>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0 bg-neutral-950 border-white/10" align="start">
+                          <Calendar
+                            mode="single"
+                            selected={field.value}
+                            onSelect={field.onChange}
+                            disabled={(date) => date < new Date()}
+                            initialFocus
+                            className="text-white"
+                          />
+                        </PopoverContent>
+                      </Popover>
+                      <FormMessage className="text-xs" />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="dropTime"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/40">Drop Time (optional)</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="time"
+                          data-testid="input-drop-time"
+                          className="bg-white/5 border-white/10 text-white rounded-none focus-visible:ring-0 focus-visible:border-white/40 [color-scheme:dark]"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-xs" />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <FormField
+                  control={form.control}
+                  name="days"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/40">Days</FormLabel>
+                      <FormControl>
+                        <Input type="number" min={1} data-testid="input-days" placeholder="Number of days" className="bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40" {...field} />
+                      </FormControl>
+                      <FormMessage className="text-xs" />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="transmission"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/40">Car Auto & Manual</FormLabel>
+                      <FormControl>
+                        <select {...field} className="w-full h-9 px-3 text-sm bg-white/5 border border-white/10 text-white rounded-none focus-visible:ring-0 focus-visible:border-white/40">
+                          <option value="Any">Any</option>
+                          <option value="Automatic">Automatic</option>
+                          <option value="Manual">Manual</option>
+                        </select>
                       </FormControl>
                       <FormMessage className="text-xs" />
                     </FormItem>
