@@ -265,8 +265,13 @@ export default function Home() {
           {/* Logo */}
           <button onClick={() => scrollTo("hero")} className="flex items-center gap-3 group">
             <picture>
-              <source srcSet="/logo-256.webp" type="image/webp" />
-              <img src="/logo.svg" alt="Varda Car Rentals" className="h-8 md:h-10 w-auto block" style={{objectFit: 'contain'}} />
+              <source srcSet={`${import.meta.env.BASE_URL}logo-256.webp`} type="image/webp" />
+              <img
+                src={`${import.meta.env.BASE_URL}logo.svg`}
+                alt="Varda Car Rentals"
+                className="h-8 md:h-10 w-auto block"
+                style={{ objectFit: "contain" }}
+              />
             </picture>
             <span className="text-[10px] font-sans uppercase tracking-[0.25em] text-white/50 group-hover:text-white/70 transition-colors">GOA</span>
           </button>
