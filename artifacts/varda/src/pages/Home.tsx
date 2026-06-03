@@ -264,15 +264,12 @@ export default function Home() {
 
           {/* Logo */}
           <button onClick={() => scrollTo("hero")} className="flex items-center gap-3 group">
-            <picture>
-              <source srcSet={`${import.meta.env.BASE_URL}logo-256.webp`} type="image/webp" />
-              <img
-                src={`${import.meta.env.BASE_URL}logo.svg`}
-                alt="Varda Car Rentals"
-                className="h-8 md:h-10 w-auto block"
-                style={{ objectFit: "contain" }}
-              />
-            </picture>
+            <img
+              src={`${import.meta.env.BASE_URL}logo.jpg`}
+              alt="Varda Car Rentals"
+              className="h-8 md:h-10 w-auto block rounded-sm"
+              style={{ objectFit: "contain" }}
+            />
             <span className="text-[10px] font-sans uppercase tracking-[0.25em] text-white/50 group-hover:text-white/70 transition-colors">GOA</span>
           </button>
 
@@ -848,10 +845,7 @@ export default function Home() {
             {/* Brand */}
             <div>
               <div className="flex items-center gap-3 mb-2">
-                <picture>
-                  <source srcSet="/logo-256.webp" type="image/webp" />
-                  <img src="/logo.svg" alt="Varda Car Rentals" className="h-10 w-auto block" style={{objectFit: 'contain'}} />
-                </picture>
+                <img src="/logo.jpg" alt="Varda Car Rentals" className="h-10 w-auto block rounded-sm" style={{objectFit: 'contain'}} />
               </div>
               <p className="text-[10px] uppercase tracking-[0.3em] text-white/30 mb-5">Car Rentals &middot; Goa</p>
               <p className="text-xs text-white/35 leading-relaxed max-w-xs">
