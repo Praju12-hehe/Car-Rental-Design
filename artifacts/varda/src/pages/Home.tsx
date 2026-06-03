@@ -238,26 +238,45 @@ export default function Home() {
       dropTime: "",
     },
   });
+const onSubmit = (values: any) => {
+    // Safe car selection resolution
+    const selectedCarName = carsData?.find((c: any) => c.id === values.carId)?.name || values.carId || "Not specified";
 
-  const onSubmit = (data: BookingFormValues) => {
-    const selectedCar = data.carId ? carsData.find((c: CarItem) => c.id === data.carId) : null;
-    const carName = selectedCar?.name || activeCar?.name || "";
-    const carSpecTransmission = (selectedCar?.specs?.transmission || activeCar?.specs?.transmission) ?? "";
-    const chosenTransmission = data.transmission && data.transmission !== "Any" ? data.transmission : carSpecTransmission || "Any";
+    // Safe date formatting helper
+    const formatDate = (dateVal: any) => {
+      if (!dateVal) return "Not specified";
+      try {
+        return format(new Date(dateVal), "dd MMM yyyy");
+      } catch (e) {
+        return "Not specified";
+      }
+    };
 
-    const pickupDateStr = data.pickupDate ? format(data.pickupDate, "PPP") : "";
-    const dropDateStr = data.dropDate ? format(data.dropDate, "PPP") : "";
+    // Cleaned message string template
+    const message = `Thank you for contacting VARDA CAR RENTAL GOA! Please let us know how we can help you.
 
-    const msg = `*Thank you for contacting VARDA CAR  RENTAL GOA! Please let us know how we can help you.*%0A%0A*New Booking -Varda Car Rentals*%0A%0A- Name : ${encodeURIComponent(
-      data.name
-    )}%0A- Contacts: ${encodeURIComponent(data.contacts)}%0A- Alternate contact : ${encodeURIComponent(data.altContact || "")} %0A- Days : ${encodeURIComponent(String(data.days || ""))}%0A- Car Auto & Manual: ${encodeURIComponent(
-      `${carName ? carName + " · " : ""}${chosenTransmission}`
-    )}%0A- Pickup location : ${encodeURIComponent(data.pickupPlace)}%0A- Date : ${encodeURIComponent(pickupDateStr)}%0A- Time : ${encodeURIComponent(data.pickupTime || "")}%0A- Drop location: ${encodeURIComponent(data.dropPlace)}%0A- Date: ${encodeURIComponent(dropDateStr)}%0A- Time : ${encodeURIComponent(data.dropTime || "")}%0A%0ANote:- Minimum 2 days booking is required to rent all self drive vehicles from us.%0AWe Don't Provide Self Drive Cars For 1 Day...%0A%0AFor Booking Enquiry : %0AContact us : 9371548253 / 7666357013%0AThankyou ...`;
+*New Booking -Varda Car Rentals* For Car Booking Please Provide :
 
-    window.open(`https://wa.me/919371548253?text=${msg}`, "_blank");
-    setBookingOpen(false);
-    form.reset();
-    setCarSearchText("");
+- Name : ${values.name || ""}
+- Contacts: ${values.contacts || ""}
+- Alternate Contact : ${values.altContact || ""}
+- Days : ${values.days || ""}
+- Car Auto & Manual: ${selectedCarName} (${values.transmission || "Any"})
+- Pickup location : ${values.pickupPlace || ""}
+- Date : ${formatDate(values.pickupDate)}
+- Time : ${values.pickupTime || ""}
+- Drop location: ${values.dropPlace || ""}
+- Date: ${formatDate(values.dropDate)}
+- Time : ${values.dropTime || ""}
+
+Note: Minimum 2 days booking is required to rent all self drive vehicles from us....
+We Don't Provide Self Drive Cars For 1 Day...
+
+Contact us : 93715 48253 / 76663 57013
+Thankyou`;
+
+    const whatsappUrl = `https://wa.me/919371548253?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
   };
 
   const scrollTo = (id: string) => {
@@ -946,19 +965,20 @@ export default function Home() {
                 />
               </div>
 
-              {/* Save & Send Button */}
-              <button
-                type="submit"
-                data-testid="button-confirm-booking"
-                className="w-full mt-8 bg-white text-neutral-900 text-[11px] uppercase tracking-[0.25em] font-semibold py-3 rounded-sm hover:bg-white/90 transition-colors flex items-center justify-center gap-2"
-              >
-                Confirm & Send to WhatsApp
-                <ArrowUpRight size={14} />
-              </button>
-            </form>
-          </Form>
-        </DialogContent>
-      </Dialog>
+           {/* Save & Send Button */}
+            <button
+              type="submit"
+              data-testid="button-confirm-booking"
+              className="w-full mt-8 bg-white text-neutral-900 text-[11px] uppercase tracking-[0.25em] font-semibold py-3 rounded-sm hover:bg-white/90 transition-colors flex items-center justify-center gap-2"
+            >
+              Confirm & Send to WhatsApp
+              <ArrowUpRight size={14} />
+            </button>
+          </form>
+        </Form>
+      </DialogContent>
+    </Dialog>
+    
 
       {/* ── ABOUT ──────────────────────────────────────────────────────────── */}
       <section id="about" className="py-28 md:py-40 bg-neutral-900/30">
