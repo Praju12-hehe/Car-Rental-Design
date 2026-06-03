@@ -36,7 +36,7 @@ type CarItem = {
   tagline: string;
 };
 
-const fleetData: CarItem[] = [
+const carsData: CarItem[] = [
   // ── BUDGET ──────────────────────────────────────────────────────────────────
   {
     id: "swift", name: "Swift", category: "Budget",
@@ -240,9 +240,9 @@ export default function Home() {
   });
 
   const onSubmit = (data: BookingFormValues) => {
-    const selectedCar = data.carId ? carsData.find(c => c.id === data.carId) : null;
+    const selectedCar = data.carId ? carsData.find((c: CarItem) => c.id === data.carId) : null;
     const carName = selectedCar?.name || activeCar?.name || "";
-    const carSpecTransmission = selectedCar?.specs?.transmission || activeCar?.specs?.transmission ?? "";
+    const carSpecTransmission = (selectedCar?.specs?.transmission || activeCar?.specs?.transmission) ?? "";
     const chosenTransmission = data.transmission && data.transmission !== "Any" ? data.transmission : carSpecTransmission || "Any";
 
     const pickupDateStr = data.pickupDate ? format(data.pickupDate, "PPP") : "";
@@ -524,7 +524,7 @@ export default function Home() {
             transition={{ duration: 0.35 }}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5"
           >
-            {fleetData.filter(c => c.category === activeCategory).map((car, idx) => (
+            {carsData.filter((c: CarItem) => c.category === activeCategory).map((car: CarItem, idx: number) => (
               <motion.button
                 key={car.id}
                 data-testid={`card-car-${car.id}`}
@@ -706,11 +706,11 @@ export default function Home() {
                 control={form.control}
                 name="carId"
                 render={({ field }) => {
-                  const filteredCars = carsData.filter(car =>
+                  const filteredCars = carsData.filter((car: CarItem) =>
                     car.name.toLowerCase().includes(carSearchText.toLowerCase()) ||
                     car.category.toLowerCase().includes(carSearchText.toLowerCase())
                   );
-                  const selectedCarObj = carsData.find(c => c.id === field.value);
+                  const selectedCarObj = carsData.find((c: CarItem) => c.id === field.value);
                   return (
                     <FormItem>
                       <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-medium">Select Car (optional)</FormLabel>
@@ -724,7 +724,7 @@ export default function Home() {
                           />
                           {carSearchText && filteredCars.length > 0 && (
                             <div className="absolute top-full left-0 right-0 bg-neutral-900 border border-white/10 border-t-0 max-h-48 overflow-y-auto z-50">
-                              {filteredCars.map((car) => (
+                              {filteredCars.map((car: CarItem) => (
                                 <button
                                   key={car.id}
                                   type="button"
