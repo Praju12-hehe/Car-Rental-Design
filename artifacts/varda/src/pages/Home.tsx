@@ -195,7 +195,8 @@ const bookingSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   contacts: z.string().min(7, "Contact number is required"),
   altContact: z.string().optional(),
-  days: z.number().min(1).optional(),
+  carId: z.string().optional(),
+  days: z.coerce.number().min(2, "Minimum 2 days required").optional(),
   transmission: z.enum(["Automatic", "Manual", "Any"]).optional(),
   pickupPlace: z.string().min(2, "Pickup location is required"),
   dropPlace: z.string().min(2, "Drop location is required"),
@@ -213,6 +214,7 @@ export default function Home() {
   const [activeCategory, setActiveCategory] = useState<string>("Budget");
   const [activeCar, setActiveCar] = useState<CarItem | null>(null);
   const [bookingOpen, setBookingOpen] = useState(false);
+  const [carSearchText, setCarSearchText] = useState("");
 
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
@@ -225,6 +227,7 @@ export default function Home() {
       name: "",
       contacts: "",
       altContact: "",
+      carId: activeCar?.id || "",
       days: 2,
       transmission: "Any",
       pickupPlace: "",
@@ -237,8 +240,9 @@ export default function Home() {
   });
 
   const onSubmit = (data: BookingFormValues) => {
-    const carName = activeCar?.name ? activeCar.name : "";
-    const carSpecTransmission = activeCar?.specs?.transmission ?? "";
+    const selectedCar = data.carId ? carsData.find(c => c.id === data.carId) : null;
+    const carName = selectedCar?.name || activeCar?.name || "";
+    const carSpecTransmission = selectedCar?.specs?.transmission || activeCar?.specs?.transmission ?? "";
     const chosenTransmission = data.transmission && data.transmission !== "Any" ? data.transmission : carSpecTransmission || "Any";
 
     const pickupDateStr = data.pickupDate ? format(data.pickupDate, "PPP") : "";
@@ -253,6 +257,7 @@ export default function Home() {
     window.open(`https://wa.me/919371548253?text=${msg}`, "_blank");
     setBookingOpen(false);
     form.reset();
+    setCarSearchText("");
   };
 
   const scrollTo = (id: string) => {
@@ -262,6 +267,8 @@ export default function Home() {
 
   const openBooking = (car?: CarItem) => {
     setActiveCar(car ?? null);
+    form.setValue("carId", car?.id || "");
+    setCarSearchText(car?.name || "");
     setBookingOpen(true);
   };
 
@@ -639,38 +646,43 @@ export default function Home() {
 
       {/* ── BOOKING MODAL ──────────────────────────────────────────────────── */}
       <Dialog open={bookingOpen} onOpenChange={setBookingOpen}>
-        <DialogContent className="sm:max-w-[480px] bg-neutral-950 border border-white/10 rounded-none p-8 shadow-2xl">
-          <DialogTitle className="text-2xl font-serif text-white mb-1">Request a Drive</DialogTitle>
-          <DialogDescription className="text-sm text-white/40 mb-8">
-            {activeCar ? `${activeCar.name} · ` : ""}We'll confirm availability on WhatsApp.
-          </DialogDescription>
+        <DialogContent className="sm:max-w-[520px] bg-neutral-950 border border-white/10 rounded-none p-0 shadow-2xl max-h-[90vh] overflow-y-auto">
+          <div className="sticky top-0 bg-neutral-950 border-b border-white/10 p-8 pb-6">
+            <DialogTitle className="text-2xl font-serif text-white">Request a Drive</DialogTitle>
+            <DialogDescription className="text-sm text-white/40 mt-2">
+              {activeCar ? `${activeCar.name} · ` : ""}We'll confirm availability on WhatsApp.
+            </DialogDescription>
+          </div>
 
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 px-8 py-6">
+              {/* Name */}
               <FormField
                 control={form.control}
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/40">Full Name</FormLabel>
+                    <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-medium">Full Name</FormLabel>
                     <FormControl>
-                      <Input data-testid="input-name" placeholder="Your name" className="bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40" {...field} />
+                      <Input data-testid="input-name" placeholder="Your name" className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40 h-10" {...field} />
                     </FormControl>
-                    <FormMessage className="text-xs" />
+                    <FormMessage className="text-xs mt-1" />
                   </FormItem>
                 )}
               />
+
+              {/* Contact & Alternate */}
               <div className="grid grid-cols-2 gap-4">
                 <FormField
                   control={form.control}
                   name="contacts"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/40">Contact</FormLabel>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-medium">Contact</FormLabel>
                       <FormControl>
-                        <Input data-testid="input-contacts" placeholder="Primary contact number" className="bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40" {...field} />
+                        <Input data-testid="input-contacts" placeholder="Phone number" className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40 h-10" {...field} />
                       </FormControl>
-                      <FormMessage className="text-xs" />
+                      <FormMessage className="text-xs mt-1" />
                     </FormItem>
                   )}
                 />
@@ -679,58 +691,91 @@ export default function Home() {
                   name="altContact"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/40">Alternate contact (optional)</FormLabel>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-medium">Alternate (optional)</FormLabel>
                       <FormControl>
-                        <Input data-testid="input-alt-contact" placeholder="Alternate contact" className="bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40" {...field} />
+                        <Input data-testid="input-alt-contact" placeholder="Alternate phone" className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40 h-10" {...field} />
                       </FormControl>
-                      <FormMessage className="text-xs" />
+                      <FormMessage className="text-xs mt-1" />
                     </FormItem>
                   )}
                 />
               </div>
 
+              {/* Car Selection */}
+              <FormField
+                control={form.control}
+                name="carId"
+                render={({ field }) => {
+                  const filteredCars = carsData.filter(car =>
+                    car.name.toLowerCase().includes(carSearchText.toLowerCase()) ||
+                    car.category.toLowerCase().includes(carSearchText.toLowerCase())
+                  );
+                  const selectedCarObj = carsData.find(c => c.id === field.value);
+                  return (
+                    <FormItem>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-medium">Select Car (optional)</FormLabel>
+                      <FormControl>
+                        <div className="mt-2 relative">
+                          <Input
+                            placeholder="Search cars..."
+                            value={carSearchText}
+                            onChange={(e) => setCarSearchText(e.target.value)}
+                            className="bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40 h-10"
+                          />
+                          {carSearchText && filteredCars.length > 0 && (
+                            <div className="absolute top-full left-0 right-0 bg-neutral-900 border border-white/10 border-t-0 max-h-48 overflow-y-auto z-50">
+                              {filteredCars.map((car) => (
+                                <button
+                                  key={car.id}
+                                  type="button"
+                                  onClick={() => {
+                                    field.onChange(car.id);
+                                    setCarSearchText(car.name);
+                                  }}
+                                  className="w-full text-left px-3 py-2 text-sm text-white hover:bg-white/10 border-b border-white/5 last:border-0"
+                                >
+                                  {car.name} <span className="text-white/40">- ₹{car.pricing[0].price.toLocaleString("en-IN")}</span>
+                                </button>
+                              ))}
+                            </div>
+                          )}
+                          {selectedCarObj && (
+                            <div className="mt-2 p-2 bg-white/5 border border-white/10 rounded text-sm text-white">
+                              ✓ {selectedCarObj.name}
+                            </div>
+                          )}
+                        </div>
+                      </FormControl>
+                      <FormMessage className="text-xs mt-1" />
+                    </FormItem>
+                  );
+                }}
+              />
+
+              {/* Pickup Location & Date */}
               <div className="grid grid-cols-2 gap-4">
                 <FormField
                   control={form.control}
                   name="pickupPlace"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/40">Pickup</FormLabel>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-medium">Pickup Location</FormLabel>
                       <FormControl>
-                        <div className="relative">
+                        <div className="mt-2 relative">
                           <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/30" />
-                          <Input data-testid="input-pickup" placeholder="Airport / Hotel" className="pl-9 bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40" {...field} />
+                          <Input data-testid="input-pickup" placeholder="Airport / Hotel" className="pl-9 bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40 h-10" {...field} />
                         </div>
                       </FormControl>
-                      <FormMessage className="text-xs" />
+                      <FormMessage className="text-xs mt-1" />
                     </FormItem>
                   )}
                 />
-                <FormField
-                  control={form.control}
-                  name="dropPlace"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/40">Drop</FormLabel>
-                      <FormControl>
-                        <div className="relative">
-                          <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/30" />
-                          <Input data-testid="input-drop" placeholder="Airport / Hotel" className="pl-9 bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40" {...field} />
-                        </div>
-                      </FormControl>
-                      <FormMessage className="text-xs" />
-                    </FormItem>
-                  )}
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
                 <FormField
                   control={form.control}
                   name="pickupDate"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/40">Pickup Date</FormLabel>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-medium">Pickup Date</FormLabel>
                       <Popover>
                         <PopoverTrigger asChild>
                           <FormControl>
@@ -738,7 +783,7 @@ export default function Home() {
                               data-testid="button-pickup-date-picker"
                               type="button"
                               className={cn(
-                                "w-full h-9 px-3 text-left text-sm bg-white/5 border border-white/10 text-white rounded-none hover:bg-white/10 transition-colors",
+                                "mt-2 w-full h-10 px-3 text-left text-sm bg-white/5 border border-white/10 text-white rounded-none hover:bg-white/10 transition-colors",
                                 !field.value && "text-white/30"
                               )}
                             >
@@ -757,37 +802,79 @@ export default function Home() {
                           />
                         </PopoverContent>
                       </Popover>
-                      <FormMessage className="text-xs" />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="pickupTime"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/40">Pickup Time (optional)</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="time"
-                          data-testid="input-pickup-time"
-                          className="bg-white/5 border-white/10 text-white rounded-none focus-visible:ring-0 focus-visible:border-white/40 [color-scheme:dark]"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage className="text-xs" />
+                      <FormMessage className="text-xs mt-1" />
                     </FormItem>
                   )}
                 />
               </div>
 
+              {/* Pickup Time & Days */}
               <div className="grid grid-cols-2 gap-4">
+                <FormField
+                  control={form.control}
+                  name="pickupTime"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-medium">Pickup Time (optional)</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="time"
+                          data-testid="input-pickup-time"
+                          className="mt-2 bg-white/5 border-white/10 text-white rounded-none focus-visible:ring-0 focus-visible:border-white/40 h-10 [color-scheme:dark]"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-xs mt-1" />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="days"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-medium">Days (min 2)</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="number"
+                          min={2}
+                          data-testid="input-days"
+                          placeholder="2"
+                          className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40 h-10"
+                          {...field}
+                          onChange={(e) => field.onChange(e.target.value ? parseInt(e.target.value) : "")}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-xs mt-1" />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              {/* Drop Location & Date */}
+              <div className="grid grid-cols-2 gap-4">
+                <FormField
+                  control={form.control}
+                  name="dropPlace"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-medium">Drop Location</FormLabel>
+                      <FormControl>
+                        <div className="mt-2 relative">
+                          <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/30" />
+                          <Input data-testid="input-drop" placeholder="Airport / Hotel" className="pl-9 bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40 h-10" {...field} />
+                        </div>
+                      </FormControl>
+                      <FormMessage className="text-xs mt-1" />
+                    </FormItem>
+                  )}
+                />
                 <FormField
                   control={form.control}
                   name="dropDate"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/40">Drop Date (optional)</FormLabel>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-medium">Drop Date (optional)</FormLabel>
                       <Popover>
                         <PopoverTrigger asChild>
                           <FormControl>
@@ -795,7 +882,7 @@ export default function Home() {
                               data-testid="button-drop-date-picker"
                               type="button"
                               className={cn(
-                                "w-full h-9 px-3 text-left text-sm bg-white/5 border border-white/10 text-white rounded-none hover:bg-white/10 transition-colors",
+                                "mt-2 w-full h-10 px-3 text-left text-sm bg-white/5 border border-white/10 text-white rounded-none hover:bg-white/10 transition-colors",
                                 !field.value && "text-white/30"
                               )}
                             >
@@ -814,41 +901,29 @@ export default function Home() {
                           />
                         </PopoverContent>
                       </Popover>
-                      <FormMessage className="text-xs" />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="dropTime"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/40">Drop Time (optional)</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="time"
-                          data-testid="input-drop-time"
-                          className="bg-white/5 border-white/10 text-white rounded-none focus-visible:ring-0 focus-visible:border-white/40 [color-scheme:dark]"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage className="text-xs" />
+                      <FormMessage className="text-xs mt-1" />
                     </FormItem>
                   )}
                 />
               </div>
 
+              {/* Drop Time & Transmission */}
               <div className="grid grid-cols-2 gap-4">
                 <FormField
                   control={form.control}
-                  name="days"
+                  name="dropTime"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/40">Days</FormLabel>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-medium">Drop Time (optional)</FormLabel>
                       <FormControl>
-                        <Input type="number" min={1} data-testid="input-days" placeholder="Number of days" className="bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40" {...field} />
+                        <Input
+                          type="time"
+                          data-testid="input-drop-time"
+                          className="mt-2 bg-white/5 border-white/10 text-white rounded-none focus-visible:ring-0 focus-visible:border-white/40 h-10 [color-scheme:dark]"
+                          {...field}
+                        />
                       </FormControl>
-                      <FormMessage className="text-xs" />
+                      <FormMessage className="text-xs mt-1" />
                     </FormItem>
                   )}
                 />
@@ -857,24 +932,25 @@ export default function Home() {
                   name="transmission"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/40">Car Auto & Manual</FormLabel>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-medium">Transmission</FormLabel>
                       <FormControl>
-                        <select {...field} className="w-full h-9 px-3 text-sm bg-white/5 border border-white/10 text-white rounded-none focus-visible:ring-0 focus-visible:border-white/40">
+                        <select {...field} className="mt-2 w-full h-10 px-3 text-sm bg-white/5 border border-white/10 text-white rounded-none focus-visible:ring-0 focus-visible:border-white/40">
                           <option value="Any">Any</option>
                           <option value="Automatic">Automatic</option>
                           <option value="Manual">Manual</option>
                         </select>
                       </FormControl>
-                      <FormMessage className="text-xs" />
+                      <FormMessage className="text-xs mt-1" />
                     </FormItem>
                   )}
                 />
               </div>
 
+              {/* Save & Send Button */}
               <button
                 type="submit"
                 data-testid="button-confirm-booking"
-                className="w-full mt-2 bg-white text-neutral-900 text-[11px] uppercase tracking-[0.25em] font-semibold py-4 rounded-sm hover:bg-white/90 transition-colors flex items-center justify-center gap-2"
+                className="w-full mt-8 bg-white text-neutral-900 text-[11px] uppercase tracking-[0.25em] font-semibold py-3 rounded-sm hover:bg-white/90 transition-colors flex items-center justify-center gap-2"
               >
                 Confirm & Send to WhatsApp
                 <ArrowUpRight size={14} />
