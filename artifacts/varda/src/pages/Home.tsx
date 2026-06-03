@@ -215,6 +215,8 @@ export default function Home() {
   const [activeCar, setActiveCar] = useState<CarItem | null>(null);
   const [bookingOpen, setBookingOpen] = useState(false);
   const [carSearchText, setCarSearchText] = useState("");
+  const [showCarDropdown, setShowCarDropdown] = useState(false);
+  
 
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
@@ -735,21 +737,29 @@ Thankyou`;
                       <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-medium">Select Car (optional)</FormLabel>
                       <FormControl>
                         <div className="mt-2 relative">
-                          <Input
-                            placeholder="Search cars..."
-                            value={carSearchText}
-                            onChange={(e) => setCarSearchText(e.target.value)}
-                            className="bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40 h-10"
-                          />
-                          {carSearchText && filteredCars.length > 0 && (
+                         <Input
+  placeholder="Search cars..."
+  value={carSearchText}
+  onFocus={() => setShowCarDropdown(true)}
+  onBlur={() => {
+    setTimeout(() => setShowCarDropdown(false), 200);
+  }}
+  onChange={(e) => {
+    setCarSearchText(e.target.value);
+    setShowCarDropdown(true);
+  }}
+  className="bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40 h-10"
+/>
+                          {showCarDropdown && filteredCars.length > 0 && (
                             <div className="absolute top-full left-0 right-0 bg-neutral-900 border border-white/10 border-t-0 max-h-48 overflow-y-auto z-50">
                               {filteredCars.map((car: CarItem) => (
                                 <button
                                   key={car.id}
                                   type="button"
                                   onClick={() => {
-                                    field.onChange(car.id);
-                                    setCarSearchText(car.name);
+                                  field.onChange(car.id);
+                                  setCarSearchText(car.name);
+                                  setShowCarDropdown(false);
                                   }}
                                   className="w-full text-left px-3 py-2 text-sm text-white hover:bg-white/10 border-b border-white/5 last:border-0"
                                 >
@@ -759,10 +769,22 @@ Thankyou`;
                             </div>
                           )}
                           {selectedCarObj && (
-                            <div className="mt-2 p-2 bg-white/5 border border-white/10 rounded text-sm text-white">
-                              ✓ {selectedCarObj.name}
-                            </div>
-                          )}
+  <div className="mt-2 flex items-center justify-between p-2 bg-white/5 border border-white/10 rounded text-sm text-white">
+    <span>✓ {selectedCarObj.name}</span>
+
+    <button
+      type="button"
+      onClick={() => {
+        field.onChange("");
+        setCarSearchText("");
+        setShowCarDropdown(false);
+      }}
+      className="text-white/50 hover:text-white"
+    >
+      ✕
+    </button>
+  </div>
+)}
                         </div>
                       </FormControl>
                       <FormMessage className="text-xs mt-1" />
