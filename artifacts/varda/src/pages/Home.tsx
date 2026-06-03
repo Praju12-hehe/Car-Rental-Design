@@ -5,6 +5,7 @@ import { MapPin, X, Menu, ArrowUpRight, ChevronDown, Users, Fuel, Settings2, Ext
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Link } from "wouter";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -265,7 +266,7 @@ export default function Home() {
           {/* Logo */}
           <button onClick={() => scrollTo("hero")} className="flex items-center gap-3 group">
             <img
-              src={`${import.meta.env.BASE_URL}logo.jpg`}
+              src="/logo.jpg"
               alt="Varda Car Rentals"
               className="h-8 md:h-10 w-auto block rounded-sm"
               style={{ objectFit: "contain" }}
@@ -894,14 +895,14 @@ export default function Home() {
             <p className="text-[11px] text-white/20">
               &copy; {new Date().getFullYear()} Varda Car Rentals. All rights reserved.
             </p>
-            <div className="flex gap-6">
+             <div className="flex gap-6">
               {[
                 { label: "Terms & Conditions", href: "/terms-and-conditions" },
                 { label: "Privacy Policy", href: "/privacy-policy" },
               ].map((item) => (
-                <a key={item.label} href={item.href} className="text-[11px] text-white/25 hover:text-white/50 transition-colors uppercase tracking-wider">
+                <Link key={item.label} href={item.href} className="text-[11px] text-white/25 hover:text-white/50 transition-colors uppercase tracking-wider">
                   {item.label}
-                </a>
+                </Link>
               ))}
             </div>
           </div>

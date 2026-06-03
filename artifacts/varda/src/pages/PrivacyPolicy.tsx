@@ -1,14 +1,15 @@
 import { ArrowLeft } from "lucide-react";
+import { Link } from "wouter";
 import { privacyPolicyContent } from "../content/privacy-policy";
 
 export default function PrivacyPolicy() {
   return (
     <main className="min-h-screen bg-neutral-950 text-white">
       <section className="mx-auto flex min-h-screen w-full max-w-4xl flex-col px-6 py-16 md:px-10 lg:px-16">
-        <a href="/" className="mb-8 inline-flex items-center gap-2 text-sm uppercase tracking-[0.25em] text-white/60 hover:text-white">
+        <Link href="/" className="mb-8 inline-flex items-center gap-2 text-sm uppercase tracking-[0.25em] text-white/60 hover:text-white">
           <ArrowLeft size={14} />
           Back to home
-        </a>
+        </Link>
 
         <h1 className="text-4xl font-serif md:text-5xl">{privacyPolicyContent.title}</h1>
         <div className="mt-2 text-xs uppercase tracking-wider text-white/40">Last Updated: {privacyPolicyContent.lastUpdated}</div>
