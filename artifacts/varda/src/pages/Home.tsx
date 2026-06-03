@@ -267,9 +267,20 @@ const onSubmit = (values: any) => {
 - Pickup location : ${values.pickupPlace || ""}
 - Date : ${formatDate(values.pickupDate)}
 - Time : ${values.pickupTime || ""}
-- Drop location: ${values.dropPlace || ""}
-- Date: ${formatDate(values.dropDate)}
+- Drop location : ${values.dropPlace || ""}
+- Date : ${formatDate(values.dropDate)}
 - Time : ${values.dropTime || ""}
+
+*Per day = 
+*Delivery charges at = 
+*Return Charges at = 
+*Refundable Security Deposit = 
+*Total Amount = 
+
+*Advance Recieved Rs = 
+
+*To Pay during car handover =
+
 
 Note: Minimum 2 days booking is required to rent all self drive vehicles from us....
 We Don't Provide Self Drive Cars For 1 Day...
