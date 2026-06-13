@@ -185,30 +185,41 @@ const carsData: CarItem[] = [
 ];
 
 const heritageData = [
-  { title: "Butterfly Beach", category: "Beaches", description: "A hidden cove framed by forested cliffs, perfect for quiet swims and sunset views.", link: "https://maps.google.com/?q=Butterfly+Beach+Goa", image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" },
-  { title: "Cabo De Rama Beach", category: "Beaches", description: "A peaceful South Goa shoreline below dramatic cliffs and old Portuguese history.", link: "https://maps.google.com/?q=Cabo+De+Rama+Beach+Goa", image: "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=800&q=80" },
-  { title: "Varca Beach", category: "Beaches", description: "Soft white sand, calm waves, and a relaxed coastal stretch made for slow beach days.", link: "https://maps.google.com/?q=Varca+Beach+Goa", image: "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=800&q=80" },
-  { title: "Benaulim Beach", category: "Beaches", description: "A laid-back beach village with golden sands, seafood shacks, and gentle evening walks.", link: "https://maps.google.com/?q=Benaulim+Beach+Goa", image: "https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=800&q=80" },
-  { title: "Calangute Beach", category: "Beaches", description: "Goa's classic beach hub, buzzing with water sports, shacks, shopping, and nightlife.", link: "https://maps.google.com/?q=Calangute+Beach+Goa", image: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=800&q=80" },
-  { title: "Keri Beach", category: "Beaches", description: "A quiet northern escape with wide sands, palm-lined roads, and peaceful sea views.", link: "https://maps.google.com/?q=Keri+Beach+Goa", image: "https://images.unsplash.com/photo-1509233725247-49e657c54213?auto=format&fit=crop&w=800&q=80" },
-  { title: "Arambol Beach", category: "Beaches", description: "A free-spirited coastline loved for music, markets, sunset circles, and cliffside cafes.", link: "https://maps.google.com/?q=Arambol+Beach+Goa", image: "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80" },
-  { title: "Tiracol Fort", category: "Forts", description: "A northern cliff-top fort with sweeping sea views and a ferry ride full of charm.", link: "https://maps.google.com/?q=Tiracol+Fort+Goa", image: "https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=800&q=80" },
-  { title: "New Zuari Bridge", category: "Landmarks", description: "A striking modern landmark with panoramic river views and a memorable coastal drive.", link: "https://maps.google.com/?q=New+Zuari+Bridge+Goa", image: "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=800&q=80" },
-  { title: "Our Lady of the Immaculate Conception Church", category: "Churches", description: "Panaji's iconic white church, known for its grand staircase and postcard-perfect facade.", link: "https://maps.google.com/?q=Our+Lady+of+the+Immaculate+Conception+Church+Goa", image: "https://images.unsplash.com/photo-1520637836862-4d197d17c50a?auto=format&fit=crop&w=800&q=80" },
-  { title: "Basilica of Bom Jesus", category: "Churches", description: "A UNESCO World Heritage Site housing the mortal remains of St. Francis Xavier.", link: "https://maps.google.com/?q=Basilica+of+Bom+Jesus+Goa", image: "https://images.unsplash.com/photo-1555523910-40e1b1d4dd06?auto=format&fit=crop&w=800&q=80" },
-  { title: "Netravali Bubbling Lake", category: "Waterfalls", description: "A curious sacred lake where natural bubbles rise through clear water in a forest setting.", link: "https://maps.google.com/?q=Netravali+Bubbling+Lake+Goa", image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=800&q=80" },
-  { title: "Dudhsagar Falls", category: "Waterfalls", description: "A spectacular four-tiered waterfall that turns the forest drive into a true adventure.", link: "https://maps.google.com/?q=Dudhsagar+Falls+Goa", image: "https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=800&q=80" },
-  { title: "Shivling Waterfall", category: "Waterfalls", description: "A serene forest waterfall ideal for nature lovers seeking a quieter Goan detour.", link: "https://maps.google.com/?q=Shivling+Waterfall+Goa", image: "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=800&q=80" },
-  { title: "Big Daddy Casino", category: "Casinos", description: "A premium floating casino experience with gaming floors, live entertainment, and river views.", link: "https://maps.google.com/?q=Big+Daddy+Casino+Goa", image: "https://images.unsplash.com/photo-1596838132731-3301c3fd4317?auto=format&fit=crop&w=800&q=80" },
-  { title: "Club Tito's", category: "Nightlife", description: "A legendary Baga nightlife stop with dance floors, DJs, and high-energy party nights.", link: "https://maps.google.com/?q=Club+Tito's+Goa", image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=800&q=80" },
-  { title: "Hammerzz Nightclub", category: "Nightlife", description: "A stylish clubbing destination known for premium sound, sleek interiors, and big weekend crowds.", link: "https://maps.google.com/?q=Hammerzz+Nightclub+Goa", image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80" },
-  { title: "SinQ Night Club", category: "Nightlife", description: "A chic Candolim party spot with poolside energy, cocktails, music, and late-night dancing.", link: "https://maps.google.com/?q=SinQ+Night+Club+Goa", image: "https://images.unsplash.com/photo-1566737236500-c8ac43014a8e?auto=format&fit=crop&w=800&q=80" },
-  { title: "The Southern Deck", category: "Nightlife", description: "A beachfront favourite for sunset drinks, coastal dining, and relaxed South Goa evenings.", link: "https://maps.google.com/?q=The+Southern+Deck+Goa", image: "https://images.unsplash.com/photo-1575444758702-4a6b9222336e?auto=format&fit=crop&w=800&q=80" },
-  { title: "Las Olas", category: "Nightlife", description: "A lively beach club atmosphere with music, cocktails, and breezy nights by the sea.", link: "https://maps.google.com/?q=Las+Olas+Goa", image: "https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=800&q=80" },
-  { title: "Hammerzz Makarena", category: "Nightlife", description: "A premium nightlife venue made for late dinners, music, cocktails, and celebration nights.", link: "https://maps.google.com/?q=Hammerzz+Makarena+Goa", image: "https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&w=800&q=80" },
-  { title: "Romeo Lane", category: "Nightlife", description: "A trendy dining and party address with upbeat music, dramatic views, and vibrant evenings.", link: "https://maps.google.com/?q=Romeo+Lane+Goa", image: "https://images.unsplash.com/photo-1525268323446-0505b6fe7778?auto=format&fit=crop&w=800&q=80" },
-  { title: "Goa Karting", category: "Adventure", description: "A fun track stop for quick laps, friendly competition, and an adrenaline break from beaches.", link: "https://maps.google.com/?q=Goa+Karting+Goa", image: "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&w=800&q=80" },
-  { title: "Gforce GoKarting", category: "Adventure", description: "A fast-paced go-karting arena for groups, families, and travellers chasing a quick thrill.", link: "https://maps.google.com/?q=Gforce+GoKarting+Goa", image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80" },
+  { title: "Butterfly Beach", category: "Beaches", description: "A hidden cove framed by forested cliffs, perfect for quiet swims and sunset views.", link: "https://maps.google.com/?q=Butterfly+Beach+Goa", image: "/places/beaches/butterfly.jpg" },
+  { title: "Cabo De Rama Beach", category: "Beaches", description: "A peaceful South Goa shoreline below dramatic cliffs and old Portuguese history.", link: "https://maps.google.com/?q=Cabo+De+Rama+Beach+Goa", image: "/places/beaches/cabo-de-rama.jpg" },
+  { title: "Varca Beach", category: "Beaches", description: "Soft white sand, calm waves, and a relaxed coastal stretch made for slow beach days.", link: "https://maps.google.com/?q=Varca+Beach+Goa", image: "/places/beaches/varca.jpg" },
+  { title: "Benaulim Beach", category: "Beaches", description: "A laid-back beach village with golden sands, seafood shacks, and gentle evening walks.", link: "https://maps.google.com/?q=Benaulim+Beach+Goa", image: "/places/beaches/benaulim.jpg" },
+  { title: "Calangute Beach", category: "Beaches", description: "Goa's classic beach hub, buzzing with water sports, shacks, shopping, and nightlife.", link: "https://maps.google.com/?q=Calangute+Beach+Goa", image: "/places/beaches/calangute.jpg" },
+  { title: "Keri Beach", category: "Beaches", description: "A quiet northern escape with wide sands, palm-lined roads, and peaceful sea views.", link: "https://maps.google.com/?q=Keri+Beach+Goa", image: "/places/beaches/keri.jpg" },
+  { title: "Arambol Beach", category: "Beaches", description: "A free-spirited coastline loved for music, markets, sunset circles, and cliffside cafes.", link: "https://maps.google.com/?q=Arambol+Beach+Goa", image: "/places/beaches/arambol.jpg" },
+  { title: "Fort Aguada", category: "Forts", description: "A 17th-century Portuguese fort with a panoramic lighthouse overlooking the sea.", link: "https://maps.google.com/?q=Fort+Aguada+Goa", image: "/places/forts/aguada.jpg" },
+  { title: "Tiracol Fort", category: "Forts", description: "A northern cliff-top fort with sweeping sea views and a ferry ride full of charm.", link: "https://maps.google.com/?q=Tiracol+Fort+Goa", image: "/places/forts/tiracol.jpg" },
+  { title: "New Zuari Bridge", category: "Landmarks", description: "A striking modern landmark with panoramic river views and a memorable coastal drive.", link: "https://maps.google.com/?q=New+Zuari+Bridge+Goa", image: "/places/landmarks/new-zuari-bridge.jpg" },
+  { title: "Our Lady of the Immaculate Conception Church", category: "Churches", description: "Panaji's iconic white church, known for its grand staircase and postcard-perfect facade.", link: "https://maps.google.com/?q=Our+Lady+of+the+Immaculate+Conception+Church+Goa", image: "/places/churches/immaculate-conception.jpg" },
+  { title: "Basilica of Bom Jesus", category: "Churches", description: "A UNESCO World Heritage Site housing the mortal remains of St. Francis Xavier.", link: "https://maps.google.com/?q=Basilica+of+Bom+Jesus+Goa", image: "/places/churches/bom-jesus.jpg" },
+  { title: "Netravali Bubbling Lake", category: "Waterfalls", description: "A curious sacred lake where natural bubbles rise through clear water in a forest setting.", link: "https://maps.google.com/?q=Netravali+Bubbling+Lake+Goa", image: "/places/waterfalls/netravali.jpg" },
+  { title: "Dudhsagar Falls", category: "Waterfalls", description: "A spectacular four-tiered waterfall that turns the forest drive into a true adventure.", link: "https://maps.google.com/?q=Dudhsagar+Falls+Goa", image: "/places/waterfalls/dudhsagar.jpg" },
+  { title: "Shivling Waterfall", category: "Waterfalls", description: "A serene forest waterfall ideal for nature lovers seeking a quieter Goan detour.", link: "https://maps.google.com/?q=Shivling+Waterfall+Goa", image: "/places/waterfalls/shivling.jpg" },
+  { title: "Club Tito's", category: "Nightlife", description: "A legendary Baga nightlife stop with dance floors, DJs, and high-energy party nights.", link: "https://maps.google.com/?q=Club+Tito's+Goa", image: "/places/nightlife/titos.jpg" },
+  { title: "Hammerzz Nightclub", category: "Nightlife", description: "A stylish clubbing destination known for premium sound, sleek interiors, and big weekend crowds.", link: "https://maps.google.com/?q=Hammerzz+Nightclub+Goa", image: "/places/nightlife/hammerzz.jpg" },
+  { title: "SinQ Night Club", category: "Nightlife", description: "A chic Candolim party spot with poolside energy, cocktails, music, and late-night dancing.", link: "https://maps.google.com/?q=SinQ+Night+Club+Goa", image: "/places/nightlife/sinq.jpg" },
+  { title: "The Southern Deck", category: "Nightlife", description: "A beachfront favourite for sunset drinks, coastal dining, and relaxed South Goa evenings.", link: "https://maps.google.com/?q=The+Southern+Deck+Goa", image: "/places/nightlife/southern-deck.jpg" },
+  { title: "Las Olas", category: "Nightlife", description: "A lively beach club atmosphere with music, cocktails, and breezy nights by the sea.", link: "https://maps.google.com/?q=Las+Olas+Goa", image: "/places/nightlife/las-olas.jpg" },
+  { title: "Hammerzz Makarena", category: "Nightlife", description: "A premium nightlife venue made for late dinners, music, cocktails, and celebration nights.", link: "https://maps.google.com/?q=Hammerzz+Makarena+Goa", image: "/places/nightlife/hammerzz-makarena.jpg" },
+  { title: "Romeo Lane", category: "Nightlife", description: "A trendy dining and party address with upbeat music, dramatic views, and vibrant evenings.", link: "https://maps.google.com/?q=Romeo+Lane+Goa", image: "/places/nightlife/romeo-lane.jpg" },
+  { title: "Big Daddy Casino", category: "Casinos", description: "A premium floating casino experience with gaming floors, live entertainment, and river views.", link: "https://maps.google.com/?q=Big+Daddy+Casino+Goa", image: "/places/casinos/big-daddy.jpg" },
+  { title: "Goa Karting", category: "Adventure", description: "A fun track stop for quick laps, friendly competition, and an adrenaline break from beaches.", link: "https://maps.google.com/?q=Goa+Karting+Goa", image: "/places/adventure/goa-karting.jpg" },
+  { title: "Gforce GoKarting", category: "Adventure", description: "A fast-paced go-karting arena for groups, families, and travellers chasing a quick thrill.", link: "https://maps.google.com/?q=Gforce+GoKarting+Goa", image: "/places/adventure/gforce-gokarting.jpg" },
+];
+
+const heritageSections = [
+  { title: "🏖 Beaches", categories: ["Beaches"] },
+  { title: "🏰 Forts & Landmarks", categories: ["Forts", "Landmarks"] },
+  { title: "⛪ Churches", categories: ["Churches"] },
+  { title: "🌊 Waterfalls", categories: ["Waterfalls"] },
+  { title: "🌃 Nightlife & Clubs", categories: ["Nightlife"] },
+  { title: "🎰 Casinos", categories: ["Casinos"] },
+  { title: "🏎 Adventure", categories: ["Adventure"] },
 ];
 
 const CATEGORIES = ["Budget", "SUV", "Premium", "Luxury"] as const;
@@ -1098,7 +1109,7 @@ Thankyou`;
               viewport={{ once: true }}
               className="text-4xl md:text-5xl lg:text-6xl font-serif text-white"
             >
-              Hidden Goa
+              Explore Goa
             </motion.h2>
           </div>
           <p className="text-sm text-white/35 max-w-xs md:text-right leading-relaxed">
@@ -1106,35 +1117,54 @@ Thankyou`;
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/5">
-          {heritageData.map((place, idx) => (
-            <motion.a
-              key={place.title}
-              href={place.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-testid={`card-heritage-${idx}`}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.08 }}
-              className="group block bg-neutral-950 overflow-hidden"
-            >
-              <div className="aspect-[3/4] relative overflow-hidden">
-                <img src={place.image} alt={place.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/90 via-neutral-950/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <p className="text-[9px] uppercase tracking-[0.3em] text-white/40 mb-2">{place.category}</p>
-                  <h3 className="text-base font-serif text-white mb-2 leading-snug">{place.title}</h3>
-                  <p className="text-xs text-white/40 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">{place.description}</p>
-                  <div className="flex items-center gap-2 mt-3 text-white/50 group-hover:text-white transition-colors">
-                    <ExternalLink size={11} />
-                    <span className="text-[10px] uppercase tracking-wider">Open in Maps</span>
-                  </div>
+        <div className="space-y-16 md:space-y-20">
+          {heritageSections.map((section) => {
+            const places = heritageData.filter((place) => section.categories.includes(place.category));
+
+            return (
+              <div key={section.title}>
+                <motion.h3
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="text-2xl md:text-3xl font-serif text-white mb-6 md:mb-8"
+                >
+                  {section.title}
+                </motion.h3>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/5">
+                  {places.map((place, idx) => (
+                    <motion.a
+                      key={place.title}
+                      href={place.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-testid={`card-heritage-${heritageData.findIndex((item) => item.title === place.title)}`}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: idx * 0.08 }}
+                      className="group block bg-neutral-950 overflow-hidden"
+                    >
+                      <div className="aspect-[3/4] relative overflow-hidden">
+                        <img src={place.image} alt={place.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/90 via-neutral-950/20 to-transparent" />
+                        <div className="absolute bottom-0 left-0 right-0 p-6">
+                          <p className="text-[9px] uppercase tracking-[0.3em] text-white/40 mb-2">{place.category}</p>
+                          <h3 className="text-base font-serif text-white mb-2 leading-snug">{place.title}</h3>
+                          <p className="text-xs text-white/40 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">{place.description}</p>
+                          <div className="flex items-center gap-2 mt-3 text-white/50 group-hover:text-white transition-colors">
+                            <ExternalLink size={11} />
+                            <span className="text-[10px] uppercase tracking-wider">Open in Maps</span>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.a>
+                  ))}
                 </div>
               </div>
-            </motion.a>
-          ))}
+            );
+          })}
         </div>
       </section>
 
