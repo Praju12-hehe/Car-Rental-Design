@@ -5,6 +5,7 @@ import { MapPin, X, Menu, ArrowUpRight, ChevronDown, Users, Fuel, Settings2, Ext
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Link } from "wouter";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -35,7 +36,7 @@ type CarItem = {
   tagline: string;
 };
 
-const fleetData: CarItem[] = [
+const carsData: CarItem[] = [
   // ── BUDGET ──────────────────────────────────────────────────────────────────
   {
     id: "swift", name: "Swift", category: "Budget",
@@ -159,25 +160,25 @@ const fleetData: CarItem[] = [
   },
   {
     id: "mini", name: "Mini Cooper", category: "Luxury",
-    image: "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=800&h=450&q=80",
+    image: "/cars/mini.png",
     pricing: [{ type: "Base", price: 18000 }],
     specs: { seats: 4, fuel: "Petrol", transmission: "Automatic" }, tagline: "British icon, Goan spirit",
   },
   {
     id: "audi-conv", name: "Audi Convertible", category: "Luxury",
-    image: "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=800&h=450&q=80",
+    image: "/cars/audi-conv.png",
     pricing: [{ type: "Base", price: 26000 }],
     specs: { seats: 4, fuel: "Petrol", transmission: "Automatic" }, tagline: "Open sky, open throttle",
   },
   {
     id: "merc-c300", name: "Mercedes C300", category: "Luxury",
-    image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&h=450&q=80",
+    image: "/cars/merc-c300.png",
     pricing: [{ type: "Base", price: 34000 }],
     specs: { seats: 5, fuel: "Petrol", transmission: "Automatic" }, tagline: "Where precision meets prestige",
   },
   {
     id: "bmw-z4", name: "BMW Z4", category: "Luxury",
-    image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&h=450&q=80",
+    image: "/cars/bmw-z4.png",
     pricing: [{ type: "Base", price: 30000 }],
     specs: { seats: 2, fuel: "Petrol", transmission: "Automatic" }, tagline: "Two seats. Zero inhibitions.",
   },
@@ -214,10 +215,17 @@ const CATEGORIES = ["Budget", "SUV", "Premium", "Luxury"] as const;
 
 const bookingSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
+  contacts: z.string().min(7, "Contact number is required"),
+  altContact: z.string().optional(),
+  carId: z.string().optional(),
+  days: z.coerce.number().min(2, "Minimum 2 days required").optional(),
+  transmission: z.enum(["Automatic", "Manual", "Any"]).optional(),
   pickupPlace: z.string().min(2, "Pickup location is required"),
   dropPlace: z.string().min(2, "Drop location is required"),
-  date: z.date({ required_error: "Date is required" }),
-  time: z.string().min(1, "Time is required"),
+  pickupDate: z.date({ required_error: "Pickup date is required" }),
+  pickupTime: z.string().optional(),
+  dropDate: z.date().optional(),
+  dropTime: z.string().optional(),
 });
 type BookingFormValues = z.infer<typeof bookingSchema>;
 
@@ -228,23 +236,82 @@ export default function Home() {
   const [activeCategory, setActiveCategory] = useState<string>("Budget");
   const [activeCar, setActiveCar] = useState<CarItem | null>(null);
   const [bookingOpen, setBookingOpen] = useState(false);
+  const [carSearchText, setCarSearchText] = useState("");
+  const [showCarDropdown, setShowCarDropdown] = useState(false);
+  
 
   const heroRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"], layoutEffect: false });
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   const form = useForm<BookingFormValues>({
     resolver: zodResolver(bookingSchema),
-    defaultValues: { name: "", pickupPlace: "", dropPlace: "", time: "" },
+    defaultValues: {
+      name: "",
+      contacts: "",
+      altContact: "",
+      carId: activeCar?.id || "",
+      days: 2,
+      transmission: "Any",
+      pickupPlace: "",
+      dropPlace: "",
+      pickupDate: new Date(),
+      pickupTime: "",
+      dropDate: undefined,
+      dropTime: "",
+    },
   });
+const onSubmit = (values: any) => {
+    // Safe car selection resolution
+    const selectedCarName = carsData?.find((c: any) => c.id === values.carId)?.name || values.carId || "Not specified";
 
-  const onSubmit = (data: BookingFormValues) => {
-    const car = activeCar?.name ? `*Car:* ${activeCar.name}%0A` : "";
-    const msg = `*New Booking — Varda Car Rentals*%0A%0A*Name:* ${encodeURIComponent(data.name)}%0A${car}*Pickup:* ${encodeURIComponent(data.pickupPlace)}%0A*Drop:* ${encodeURIComponent(data.dropPlace)}%0A*Date:* ${format(data.date, "PPP")}%0A*Time:* ${encodeURIComponent(data.time)}`;
-    window.open(`https://wa.me/917666357013?text=${msg}`, "_blank");
-    setBookingOpen(false);
-    form.reset();
+    // Safe date formatting helper
+    const formatDate = (dateVal: any) => {
+      if (!dateVal) return "Not specified";
+      try {
+        return format(new Date(dateVal), "dd MMM yyyy");
+      } catch (e) {
+        return "Not specified";
+      }
+    };
+
+    // Cleaned message string template
+    const message = `Thank you for contacting VARDA CAR RENTAL GOA! Please let us know how we can help you.
+
+*New Booking -Varda Car Rentals* For Car Booking Please Provide :
+
+- Name : ${values.name || ""}
+- Contacts: ${values.contacts || ""}
+- Alternate Contact : ${values.altContact || ""}
+- Days : ${values.days || ""}
+- Car Auto & Manual: ${selectedCarName} (${values.transmission || "Any"})
+- Pickup location : ${values.pickupPlace || ""}
+- Date : ${formatDate(values.pickupDate)}
+- Time : ${values.pickupTime || ""}
+- Drop location : ${values.dropPlace || ""}
+- Date : ${formatDate(values.dropDate)}
+- Time : ${values.dropTime || ""}
+
+*Per day = 
+*Delivery charges at = 
+*Return Charges at = 
+*Refundable Security Deposit = 
+*Total Amount = 
+
+*Advance Recieved Rs = 
+
+*To Pay during car handover =
+
+
+Note: Minimum 2 days booking is required to rent all self drive vehicles from us....
+We Don't Provide Self Drive Cars For 1 Day...
+
+Contact us : 93715 48253 / 76663 57013
+Thankyou`;
+
+    const whatsappUrl = `https://wa.me/919371548253?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
   };
 
   const scrollTo = (id: string) => {
@@ -254,19 +321,45 @@ export default function Home() {
 
   const openBooking = (car?: CarItem) => {
     setActiveCar(car ?? null);
+    form.setValue("carId", car?.id || "");
+    setCarSearchText(car?.name || "");
     setBookingOpen(true);
   };
 
   return (
     <div className="min-h-screen bg-neutral-950 text-white overflow-x-hidden font-sans">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CarRental",
+          name: "Varda Car Rentals",
+          url: "https://varda.example.com/",
+          description: "Premium cab rental and self-drive car hire in Goa for airport transfers, sightseeing, beach trips, and wedding travel.",
+          areaServed: ["Goa", "North Goa", "South Goa", "Dabolim Airport", "Panaji"],
+          telephone: "+91-9371548253",
+          priceRange: "₹1200 - ₹34000",
+          sameAs: ["https://www.instagram.com/"],
+          availableService: [
+            "Cab rental in Goa",
+            "Self-drive car rental in Goa",
+            "Airport transfer in Goa",
+            "Goa sightseeing car hire"
+          ]
+        })
+      }} />
 
       {/* ── NAV ────────────────────────────────────────────────────────────── */}
       <header className="fixed top-0 left-0 right-0 z-50">
         <div className="max-w-screen-xl mx-auto px-6 md:px-10 h-16 md:h-20 flex items-center justify-between">
 
           {/* Logo */}
-          <button onClick={() => scrollTo("hero")} className="flex items-baseline gap-1.5 group">
-            <span className="text-2xl md:text-3xl font-serif text-white tracking-tight group-hover:opacity-80 transition-opacity">Varda</span>
+          <button onClick={() => scrollTo("hero")} className="flex items-center gap-3 group">
+            <img
+              src="/logo.jpg"
+              alt="Varda Car Rentals"
+              className="h-8 md:h-10 w-auto block rounded-sm"
+              style={{ objectFit: "contain" }}
+            />
             <span className="text-[10px] font-sans uppercase tracking-[0.25em] text-white/50 group-hover:text-white/70 transition-colors">GOA</span>
           </button>
 
@@ -371,8 +464,8 @@ export default function Home() {
             transition={{ duration: 1, delay: 0.2 }}
             className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif font-medium leading-[1.0] tracking-tight text-white max-w-3xl mb-6"
           >
-            Premium Wheels for<br />
-            Your <em className="not-italic italic">Goa</em> Journey.
+            Rent a Cab in Goa<br />
+            with Premium Self-Drive Car Rentals.
           </motion.h1>
 
           {/* Subtitle */}
@@ -382,8 +475,7 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="text-sm md:text-base text-white/55 font-light max-w-md mb-10 leading-relaxed"
           >
-            From spirited hatchbacks weaving through Fontainhas to convertibles
-            cruising the coast — drive Goa the way it deserves to be driven.
+            Book a cab in Goa, airport transfer, or self-drive car rental for beach trips, hill drives, sightseeing, and wedding travel.
           </motion.p>
 
           {/* CTAs */}
@@ -486,7 +578,7 @@ export default function Home() {
             transition={{ duration: 0.35 }}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5"
           >
-            {fleetData.filter(c => c.category === activeCategory).map((car, idx) => (
+            {carsData.filter((c: CarItem) => c.category === activeCategory).map((car: CarItem, idx: number) => (
               <motion.button
                 key={car.id}
                 data-testid={`card-car-${car.id}`}
@@ -608,76 +700,164 @@ export default function Home() {
 
       {/* ── BOOKING MODAL ──────────────────────────────────────────────────── */}
       <Dialog open={bookingOpen} onOpenChange={setBookingOpen}>
-        <DialogContent className="sm:max-w-[480px] bg-neutral-950 border border-white/10 rounded-none p-8 shadow-2xl">
-          <DialogTitle className="text-2xl font-serif text-white mb-1">Request a Drive</DialogTitle>
-          <DialogDescription className="text-sm text-white/40 mb-8">
-            {activeCar ? `${activeCar.name} · ` : ""}We'll confirm availability on WhatsApp.
-          </DialogDescription>
+        <DialogContent className="sm:max-w-[520px] bg-neutral-950 border border-white/10 rounded-none p-0 shadow-2xl max-h-[90vh] overflow-y-auto">
+          <div className="sticky top-0 bg-neutral-950 border-b border-white/10 p-8 pb-6">
+            <DialogTitle className="text-2xl font-serif text-white">Request a Drive</DialogTitle>
+            <DialogDescription className="text-sm text-white/40 mt-2">
+              {activeCar ? `${activeCar.name} · ` : ""}We'll confirm availability on WhatsApp.
+            </DialogDescription>
+          </div>
 
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 px-8 py-6">
+              {/* Name */}
               <FormField
                 control={form.control}
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/40">Full Name</FormLabel>
+                    <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-medium">Full Name</FormLabel>
                     <FormControl>
-                      <Input data-testid="input-name" placeholder="Your name" className="bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40" {...field} />
+                      <Input data-testid="input-name" placeholder="Your name" className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40 h-10" {...field} />
                     </FormControl>
-                    <FormMessage className="text-xs" />
+                    <FormMessage className="text-xs mt-1" />
                   </FormItem>
                 )}
               />
+
+              {/* Contact & Alternate */}
+              <div className="grid grid-cols-2 gap-4">
+                <FormField
+                  control={form.control}
+                  name="contacts"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-medium">Contact</FormLabel>
+                      <FormControl>
+                        <Input data-testid="input-contacts" placeholder="Phone number" className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40 h-10" {...field} />
+                      </FormControl>
+                      <FormMessage className="text-xs mt-1" />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="altContact"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-medium">Alternate (optional)</FormLabel>
+                      <FormControl>
+                        <Input data-testid="input-alt-contact" placeholder="Alternate phone" className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40 h-10" {...field} />
+                      </FormControl>
+                      <FormMessage className="text-xs mt-1" />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              {/* Car Selection */}
+              <FormField
+                control={form.control}
+                name="carId"
+                render={({ field }) => {
+                  const filteredCars = carsData.filter((car: CarItem) =>
+                    car.name.toLowerCase().includes(carSearchText.toLowerCase()) ||
+                    car.category.toLowerCase().includes(carSearchText.toLowerCase())
+                  );
+                  const selectedCarObj = carsData.find((c: CarItem) => c.id === field.value);
+                  return (
+                    <FormItem>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-medium">Select Car (optional)</FormLabel>
+                      <FormControl>
+                        <div className="mt-2 relative">
+                         <Input
+  placeholder="Search cars..."
+  value={carSearchText}
+  onFocus={() => setShowCarDropdown(true)}
+  onBlur={() => {
+    setTimeout(() => setShowCarDropdown(false), 200);
+  }}
+  onChange={(e) => {
+    setCarSearchText(e.target.value);
+    setShowCarDropdown(true);
+  }}
+  className="bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40 h-10"
+/>
+                          {showCarDropdown && filteredCars.length > 0 && (
+                            <div className="absolute top-full left-0 right-0 bg-neutral-900 border border-white/10 border-t-0 max-h-48 overflow-y-auto z-50">
+                              {filteredCars.map((car: CarItem) => (
+                                <button
+                                  key={car.id}
+                                  type="button"
+                                  onClick={() => {
+                                  field.onChange(car.id);
+                                  setCarSearchText(car.name);
+                                  setShowCarDropdown(false);
+                                  }}
+                                  className="w-full text-left px-3 py-2 text-sm text-white hover:bg-white/10 border-b border-white/5 last:border-0"
+                                >
+                                  {car.name} <span className="text-white/40">- ₹{car.pricing[0].price.toLocaleString("en-IN")}</span>
+                                </button>
+                              ))}
+                            </div>
+                          )}
+                          {selectedCarObj && (
+  <div className="mt-2 flex items-center justify-between p-2 bg-white/5 border border-white/10 rounded text-sm text-white">
+    <span>✓ {selectedCarObj.name}</span>
+
+    <button
+      type="button"
+      onClick={() => {
+        field.onChange("");
+        setCarSearchText("");
+        setShowCarDropdown(false);
+      }}
+      className="text-white/50 hover:text-white"
+    >
+      ✕
+    </button>
+  </div>
+)}
+                        </div>
+                      </FormControl>
+                      <FormMessage className="text-xs mt-1" />
+                    </FormItem>
+                  );
+                }}
+              />
+
+              {/* Pickup Location & Date */}
               <div className="grid grid-cols-2 gap-4">
                 <FormField
                   control={form.control}
                   name="pickupPlace"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/40">Pickup</FormLabel>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-medium">Pickup Location</FormLabel>
                       <FormControl>
-                        <div className="relative">
+                        <div className="mt-2 relative">
                           <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/30" />
-                          <Input data-testid="input-pickup" placeholder="Airport / Hotel" className="pl-9 bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40" {...field} />
+                          <Input data-testid="input-pickup" placeholder="Airport / Hotel" className="pl-9 bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40 h-10" {...field} />
                         </div>
                       </FormControl>
-                      <FormMessage className="text-xs" />
+                      <FormMessage className="text-xs mt-1" />
                     </FormItem>
                   )}
                 />
                 <FormField
                   control={form.control}
-                  name="dropPlace"
+                  name="pickupDate"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/40">Drop</FormLabel>
-                      <FormControl>
-                        <div className="relative">
-                          <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/30" />
-                          <Input data-testid="input-drop" placeholder="Airport / Hotel" className="pl-9 bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40" {...field} />
-                        </div>
-                      </FormControl>
-                      <FormMessage className="text-xs" />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <FormField
-                  control={form.control}
-                  name="date"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/40">Date</FormLabel>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-medium">Pickup Date</FormLabel>
                       <Popover>
                         <PopoverTrigger asChild>
                           <FormControl>
                             <button
-                              data-testid="button-date-picker"
+                              data-testid="button-pickup-date-picker"
                               type="button"
                               className={cn(
-                                "w-full h-9 px-3 text-left text-sm bg-white/5 border border-white/10 text-white rounded-none hover:bg-white/10 transition-colors",
+                                "mt-2 w-full h-10 px-3 text-left text-sm bg-white/5 border border-white/10 text-white rounded-none hover:bg-white/10 transition-colors",
                                 !field.value && "text-white/30"
                               )}
                             >
@@ -696,42 +876,164 @@ export default function Home() {
                           />
                         </PopoverContent>
                       </Popover>
-                      <FormMessage className="text-xs" />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="time"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/40">Time</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="time"
-                          data-testid="input-time"
-                          className="bg-white/5 border-white/10 text-white rounded-none focus-visible:ring-0 focus-visible:border-white/40 [color-scheme:dark]"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage className="text-xs" />
+                      <FormMessage className="text-xs mt-1" />
                     </FormItem>
                   )}
                 />
               </div>
 
-              <button
-                type="submit"
-                data-testid="button-confirm-booking"
-                className="w-full mt-2 bg-white text-neutral-900 text-[11px] uppercase tracking-[0.25em] font-semibold py-4 rounded-sm hover:bg-white/90 transition-colors flex items-center justify-center gap-2"
-              >
-                Confirm & Send to WhatsApp
-                <ArrowUpRight size={14} />
-              </button>
-            </form>
-          </Form>
-        </DialogContent>
-      </Dialog>
+              {/* Pickup Time & Days */}
+              <div className="grid grid-cols-2 gap-4">
+                <FormField
+                  control={form.control}
+                  name="pickupTime"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-medium">Pickup Time (optional)</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="time"
+                          data-testid="input-pickup-time"
+                          className="mt-2 bg-white/5 border-white/10 text-white rounded-none focus-visible:ring-0 focus-visible:border-white/40 h-10 [color-scheme:dark]"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-xs mt-1" />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="days"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-medium">Days (min 2)</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="number"
+                          min={2}
+                          data-testid="input-days"
+                          placeholder="2"
+                          className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40 h-10"
+                          {...field}
+                          onChange={(e) => field.onChange(e.target.value ? parseInt(e.target.value) : "")}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-xs mt-1" />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              {/* Drop Location & Date */}
+              <div className="grid grid-cols-2 gap-4">
+                <FormField
+                  control={form.control}
+                  name="dropPlace"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-medium">Drop Location</FormLabel>
+                      <FormControl>
+                        <div className="mt-2 relative">
+                          <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/30" />
+                          <Input data-testid="input-drop" placeholder="Airport / Hotel" className="pl-9 bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40 h-10" {...field} />
+                        </div>
+                      </FormControl>
+                      <FormMessage className="text-xs mt-1" />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="dropDate"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-medium">Drop Date (optional)</FormLabel>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <FormControl>
+                            <button
+                              data-testid="button-drop-date-picker"
+                              type="button"
+                              className={cn(
+                                "mt-2 w-full h-10 px-3 text-left text-sm bg-white/5 border border-white/10 text-white rounded-none hover:bg-white/10 transition-colors",
+                                !field.value && "text-white/30"
+                              )}
+                            >
+                              {field.value ? format(field.value, "dd MMM yy") : "Pick date"}
+                            </button>
+                          </FormControl>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0 bg-neutral-950 border-white/10" align="start">
+                          <Calendar
+                            mode="single"
+                            selected={field.value}
+                            onSelect={field.onChange}
+                            disabled={(date) => date < new Date()}
+                            initialFocus
+                            className="text-white"
+                          />
+                        </PopoverContent>
+                      </Popover>
+                      <FormMessage className="text-xs mt-1" />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              {/* Drop Time & Transmission */}
+              <div className="grid grid-cols-2 gap-4">
+                <FormField
+                  control={form.control}
+                  name="dropTime"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-medium">Drop Time (optional)</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="time"
+                          data-testid="input-drop-time"
+                          className="mt-2 bg-white/5 border-white/10 text-white rounded-none focus-visible:ring-0 focus-visible:border-white/40 h-10 [color-scheme:dark]"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-xs mt-1" />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="transmission"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-medium">Transmission</FormLabel>
+                      <FormControl>
+                        <select {...field} className="mt-2 w-full h-10 px-3 text-sm bg-white/5 border border-white/10 text-white rounded-none focus-visible:ring-0 focus-visible:border-white/40">
+                          <option value="Any">Any</option>
+                          <option value="Automatic">Automatic</option>
+                          <option value="Manual">Manual</option>
+                        </select>
+                      </FormControl>
+                      <FormMessage className="text-xs mt-1" />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+           {/* Save & Send Button */}
+            <button
+              type="submit"
+              data-testid="button-confirm-booking"
+              className="w-full mt-8 bg-white text-neutral-900 text-[11px] uppercase tracking-[0.25em] font-semibold py-3 rounded-sm hover:bg-white/90 transition-colors flex items-center justify-center gap-2"
+            >
+              Confirm & Send to WhatsApp
+              <ArrowUpRight size={14} />
+            </button>
+          </form>
+        </Form>
+      </DialogContent>
+    </Dialog>
+    
 
       {/* ── ABOUT ──────────────────────────────────────────────────────────── */}
       <section id="about" className="py-28 md:py-40 bg-neutral-900/30">
@@ -842,7 +1144,9 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 mb-16">
             {/* Brand */}
             <div>
-              <p className="text-2xl font-serif text-white mb-1">Varda</p>
+              <div className="flex items-center gap-3 mb-2">
+                <img src="/logo.jpg" alt="Varda Car Rentals" className="h-10 w-auto block rounded-sm" style={{objectFit: 'contain'}} />
+              </div>
               <p className="text-[10px] uppercase tracking-[0.3em] text-white/30 mb-5">Car Rentals &middot; Goa</p>
               <p className="text-xs text-white/35 leading-relaxed max-w-xs">
                 Premium car rentals for discerning travellers exploring Goa's coastline, heritage, and wilderness.
@@ -853,7 +1157,11 @@ export default function Home() {
             <div id="contact-details">
               <p className="text-[10px] uppercase tracking-[0.25em] text-white/30 mb-6">Contact</p>
               <div className="space-y-4">
-                <a href="tel:7666357013" data-testid="link-phone" className="flex items-center gap-3 text-sm text-white/50 hover:text-white transition-colors group">
+                <a href="tel:9371548253" data-testid="link-phone" className="flex items-center gap-3 text-sm text-white/50 hover:text-white transition-colors group">
+                  <Phone size={13} className="text-white/30 group-hover:text-white/60 transition-colors" />
+                  9371548253
+                </a>
+                <a href="tel:7666357013" data-testid="link-phone-alt" className="flex items-center gap-3 text-sm text-white/50 hover:text-white transition-colors group">
                   <Phone size={13} className="text-white/30 group-hover:text-white/60 transition-colors" />
                   7666357013
                 </a>
@@ -886,11 +1194,14 @@ export default function Home() {
             <p className="text-[11px] text-white/20">
               &copy; {new Date().getFullYear()} Varda Car Rentals. All rights reserved.
             </p>
-            <div className="flex gap-6">
-              {["Terms of Service", "Privacy Policy"].map((item) => (
-                <a key={item} href="#" className="text-[11px] text-white/25 hover:text-white/50 transition-colors uppercase tracking-wider">
-                  {item}
-                </a>
+             <div className="flex gap-6">
+              {[
+                { label: "Terms & Conditions", href: "/terms-and-conditions" },
+                { label: "Privacy Policy", href: "/privacy-policy" },
+              ].map((item) => (
+                <Link key={item.label} href={item.href} className="text-[11px] text-white/25 hover:text-white/50 transition-colors uppercase tracking-wider">
+                  {item.label}
+                </Link>
               ))}
             </div>
           </div>

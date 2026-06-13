@@ -1,0 +1,202 @@
+﻿Diagnose log at 2026-05-29T08:43:16Z
+
+AppPath: C:\Program Files\Git\mingw64\bin\git-credential-manager.exe
+InstallDir: C:\Program Files\Git\mingw64\bin\
+Version: 2.6.1+786ab03440ddc82e807a97c0e540f5247e44cec6
+
+------------
+Diagnostic: Environment
+Skipped: False
+Success: True
+Exception: None
+Log:
+OSType: Windows
+OSVersion: 10.0 (build 26200)
+Reading environment variables... OK
+ Variables:
+PROCESSOR_ARCHITEW6432=AMD64
+DriverData=C:\Windows\System32\Drivers\DriverData
+COMPUTERNAME=DESKTOP-1MA7ARD
+MSYSTEM=MINGW64
+CommonProgramFiles(x86)=C:\Program Files (x86)\Common Files
+EFC_5972_3789132940=1
+OneDrive=C:\Users\USER\OneDrive
+PYTHON_BASIC_REPL=1
+HOMEPATH=\Users\USER
+SESSIONNAME=Console
+EFC_5972_1262719628=1
+LANG=en_US.UTF-8
+TMP=C:\Users\USER\AppData\Local\Temp
+GK_GL_ADDR=http://127.0.0.1:53175
+PROCESSOR_REVISION=1801
+PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL
+GIT_ASKPASS=c:\Users\USER\AppData\Roaming\Code\User\globalStorage\vscode.git\askpass\493597c785d4c5cb\askpass.sh
+GIT_EXEC_PATH=C:/Program Files/Git/mingw64/libexec/git-core
+TEMP=C:\Users\USER\AppData\Local\Temp
+LOCALAPPDATA=C:\Users\USER\AppData\Local
+PUBLIC=C:\Users\Public
+TERM=xterm-256color
+PROCESSOR_IDENTIFIER=AMD64 Family 23 Model 24 Stepping 1, AuthenticAMD
+GIT_EDITOR=:
+VSCODE_PYTHON_AUTOACTIVATE_GUARD=1
+COLORTERM=truecolor
+windir=C:\WINDOWS
+PYTHONSTARTUP=c:\Users\USER\AppData\Roaming\Code\User\workspaceStorage\d7a776f13cf74445db81d9ee08f23064\ms-python.python\pythonrc.py
+USERDOMAIN=DESKTOP-1MA7ARD
+ProgramFiles(x86)=C:\Program Files (x86)
+Path=C:/Program Files/Git/mingw64/libexec/git-core;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\USER\bin;c:\Users\USER\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;c:\Users\USER\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\copilotCli;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Users\USER\Downloads\mingw-get-setup.exe;C:\MinGW\bin;C:\Program Files\Git\cmd;C:\Program Files\dotnet\;C:\Program Files\nodejs\;C:\Users\USER\.node-portable\node;C:\Users\USER\.local\bin;C:\Users\USER\AppData\Local\Microsoft\WindowsApps;C:\Users\USER\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\USER\AppData\Local\GitHubDesktop\bin;C:\Users\USER\.dotnet\tools;C:\Users\USER\AppData\Local\Programs\Antigravity\bin;C:\Users\USER\AppData\Local\Programs\Antigravity IDE\bin;C:\Users\USER\AppData\Roaming\npm
+TERM_PROGRAM=vscode
+PROCESSOR_LEVEL=23
+NUMBER_OF_PROCESSORS=4
+TMPDIR=C:\Users\USER\AppData\Local\Temp
+COPILOT_AGENT=1
+TERM_PROGRAM_VERSION=1.121.0
+VSCODE_GIT_ASKPASS_MAIN=c:\Users\USER\AppData\Roaming\Code\User\globalStorage\vscode.git\askpass\493597c785d4c5cb\askpass-main.js
+PSModulePath=C:\Users\USER\OneDrive\Documents\WindowsPowerShell\Modules;C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
+VSCODE_GIT_IPC_HANDLE=\\.\pipe\vscode-git-f3023eef4b-sock
+CommonProgramFiles=C:\Program Files (x86)\Common Files
+VSCODE_INJECTION=1
+GIT_MERGE_AUTOEDIT=no
+CHROME_CRASHPAD_PIPE_NAME=\\.\pipe\crashpad_10564_OHRELDAWTQPSSHDC
+EFC_5972_2283032206=1
+BASE_PATH=/
+ProgramData=C:\ProgramData
+ProgramW6432=C:\Program Files
+GIT_PAGER=cat
+ProgramFiles=C:\Program Files (x86)
+GIT_TRACE2_PARENT_SID=40f9c209-d0ba-4741-94ea-0e96d1d72175
+VSCODE_GIT_ASKPASS_NODE=C:\Users\USER\AppData\Local\Programs\Microsoft VS Code\Code.exe
+PLINK_PROTOCOL=ssh
+SystemRoot=C:\WINDOWS
+EFC_5972_1592913036=1
+HOME=C:\Users\USER
+VSCODE_GIT_ASKPASS_EXTRA_ARGS=
+CommonProgramW6432=C:\Program Files\Common Files
+LOGONSERVER=\\DESKTOP-1MA7ARD
+USERPROFILE=C:\Users\USER
+USERDOMAIN_ROAMINGPROFILE=DESKTOP-1MA7ARD
+APPDATA=C:\Users\USER\AppData\Roaming
+HOMEDRIVE=C:
+EFC_5972_2775293581=1
+USERNAME=USER
+GK_GL_PATH=C:\Users\USER\AppData\Local\Temp\gitkraken\gitlens\gitlens-ipc-server-10564-53175.json
+PROCESSOR_ARCHITECTURE=x86
+OS=Windows_NT
+ComSpec=C:\WINDOWS\system32\cmd.exe
+SystemDrive=C:
+PORT=3000
+OneDriveConsumer=C:\Users\USER\OneDrive
+ALLUSERSPROFILE=C:\ProgramData
+
+
+------------
+Diagnostic: File system
+Skipped: False
+Success: True
+Exception: None
+Log:
+Temporary directory is 'C:\Users\USER\AppData\Local\Temp\'...
+Checking basic file I/O...
+Writing to temporary file 'C:\Users\USER\AppData\Local\Temp\9aac41a99d1d0f9deaf2464a'... OK
+Reading from temporary file 'C:\Users\USER\AppData\Local\Temp\9aac41a99d1d0f9deaf2464a'... OK
+Deleting temporary file 'C:\Users\USER\AppData\Local\Temp\9aac41a99d1d0f9deaf2464a'... OK
+Testing IFileSystem instance...
+UserHomePath: C:\Users\USER
+UserDataDirectoryPath: C:\Users\USER\.gcm
+GetCurrentDirectory(): C:\Users\USER\OneDrive\Apps\Car-Rental-Design
+
+------------
+Diagnostic: Networking
+Skipped: False
+Success: True
+Exception: None
+Log:
+Checking networking and HTTP stack...
+Creating HTTP client... OK
+IsNetworkAvailable: True
+Sending HEAD request to http://example.com...Sending HEAD request to https://example.com... OK
+ OK
+Acquiring free TCP port... OK
+Testing local HTTP loopback connections...
+Creating new HTTP listener for http://localhost:60391/... OK
+Waiting for loopback connection... OK
+Writing response... OK
+Waiting for response data... OK
+Loopback connection data OK
+
+------------
+Diagnostic: Git
+Skipped: False
+Success: True
+Exception: None
+Log:
+Getting Git version... OK
+Git version is '2.52.0.windows.1'
+Locating current repository...Git repository at 'C:/Users/USER/OneDrive/Apps/Car-Rental-Design/.git'
+ OK
+Listing all Git configuration... OK
+Git configuration:
+file:C:/Program Files/Git/etc/gitconfig	diff.astextplain.textconv=astextplain
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.clean=git-lfs clean -- %f
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.smudge=git-lfs smudge -- %f
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.process=git-lfs filter-process
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.required=true
+file:C:/Program Files/Git/etc/gitconfig	http.sslbackend=openssl
+file:C:/Program Files/Git/etc/gitconfig	http.sslcainfo=C:/Program Files/Git/mingw64/etc/ssl/certs/ca-bundle.crt
+file:C:/Program Files/Git/etc/gitconfig	core.autocrlf=true
+file:C:/Program Files/Git/etc/gitconfig	core.fscache=true
+file:C:/Program Files/Git/etc/gitconfig	core.symlinks=false
+file:C:/Program Files/Git/etc/gitconfig	pull.rebase=false
+file:C:/Program Files/Git/etc/gitconfig	credential.helper=manager
+file:C:/Program Files/Git/etc/gitconfig	credential.https://dev.azure.com.usehttppath=true
+file:C:/Program Files/Git/etc/gitconfig	init.defaultbranch=master
+file:C:/Users/USER/.gitconfig	user.name=Praju12-hehe
+file:C:/Users/USER/.gitconfig	user.email=ghadipraju2004@gmail.com
+file:.git/config	core.repositoryformatversion=0
+file:.git/config	core.filemode=false
+file:.git/config	core.bare=false
+file:.git/config	core.logallrefupdates=true
+file:.git/config	core.symlinks=false
+file:.git/config	core.ignorecase=true
+file:.git/config	branch.main.remote=origin
+file:.git/config	branch.main.vscode-merge-base=origin/main
+file:.git/config	branch.main.merge=refs/heads/main
+file:.git/config	remote.origin.url=https://github.com/Praju12-hehe/Car-Rental-Design.git
+file:.git/config	remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+
+
+------------
+Diagnostic: Credential storage
+Skipped: False
+Success: True
+Exception: None
+Log:
+ICredentialStore instance is of type: CredentialStore
+Writing test credential... OK
+Reading test credential... OK
+Deleting test credential... OK
+
+------------
+Diagnostic: Microsoft authentication (AAD/MSA)
+Skipped: False
+Success: True
+Exception: None
+Log:
+Broker is not enabled.
+Flow type is: Auto
+Gathering MSAL token cache data... OK
+CacheDirectory: C:\Users\USER\AppData\Local\.IdentityService
+CacheFileName: msal.cache
+CacheFilePath: C:\Users\USER\AppData\Local\.IdentityService\msal.cache
+Creating cache helper... OK
+Verifying MSAL token cache persistence... OK
+
+------------
+Diagnostic: GitHub API
+Skipped: False
+Success: True
+Exception: None
+Log:
+Using 'https://github.com/' as API target.
+Querying '/meta' endpoint... OK
+

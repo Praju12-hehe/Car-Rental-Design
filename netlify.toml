@@ -1,0 +1,13 @@
+# Netlify configuration file
+# This file is used to configure build settings and redirects on Netlify.
+
+[build]
+  publish = "artifacts/varda/dist"
+  command = "pnpm install && pnpm run build"
+
+# Redirect all requests to index.html for client-side routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
