@@ -185,31 +185,31 @@ const carsData: CarItem[] = [
 ];
 
 const heritageData = [
-  { title: "Butterfly Beach", category: "Beaches", description: "A hidden cove framed by forested cliffs, perfect for quiet swims and sunset views.", link: "https://maps.google.com/?q=Butterfly+Beach+Goa", image: "/places/beaches/butterfly.jpg" },
-  { title: "Cabo De Rama Beach", category: "Beaches", description: "A peaceful South Goa shoreline below dramatic cliffs and old Portuguese history.", link: "https://maps.google.com/?q=Cabo+De+Rama+Beach+Goa", image: "/places/beaches/cabo-de-rama.jpg" },
-  { title: "Varca Beach", category: "Beaches", description: "Soft white sand, calm waves, and a relaxed coastal stretch made for slow beach days.", link: "https://maps.google.com/?q=Varca+Beach+Goa", image: "/places/beaches/varca.jpg" },
-  { title: "Benaulim Beach", category: "Beaches", description: "A laid-back beach village with golden sands, seafood shacks, and gentle evening walks.", link: "https://maps.google.com/?q=Benaulim+Beach+Goa", image: "/places/beaches/benaulim.jpg" },
-  { title: "Calangute Beach", category: "Beaches", description: "Goa's classic beach hub, buzzing with water sports, shacks, shopping, and nightlife.", link: "https://maps.google.com/?q=Calangute+Beach+Goa", image: "/places/beaches/calangute.jpg" },
-  { title: "Keri Beach", category: "Beaches", description: "A quiet northern escape with wide sands, palm-lined roads, and peaceful sea views.", link: "https://maps.google.com/?q=Keri+Beach+Goa", image: "/places/beaches/keri.jpg" },
-  { title: "Arambol Beach", category: "Beaches", description: "A free-spirited coastline loved for music, markets, sunset circles, and cliffside cafes.", link: "https://maps.google.com/?q=Arambol+Beach+Goa", image: "/places/beaches/arambol.jpg" },
-  { title: "Fort Aguada", category: "Forts", description: "A 17th-century Portuguese fort with a panoramic lighthouse overlooking the sea.", link: "https://maps.google.com/?q=Fort+Aguada+Goa", image: "/places/forts/aguada.jpg" },
-  { title: "Tiracol Fort", category: "Forts", description: "A northern cliff-top fort with sweeping sea views and a ferry ride full of charm.", link: "https://maps.google.com/?q=Tiracol+Fort+Goa", image: "/places/forts/tiracol.jpg" },
-  { title: "New Zuari Bridge", category: "Landmarks", description: "A striking modern landmark with panoramic river views and a memorable coastal drive.", link: "https://maps.google.com/?q=New+Zuari+Bridge+Goa", image: "/places/landmarks/new-zuari-bridge.jpg" },
-  { title: "Our Lady of the Immaculate Conception Church", category: "Churches", description: "Panaji's iconic white church, known for its grand staircase and postcard-perfect facade.", link: "https://maps.google.com/?q=Our+Lady+of+the+Immaculate+Conception+Church+Goa", image: "/places/churches/immaculate-conception.jpg" },
-  { title: "Basilica of Bom Jesus", category: "Churches", description: "A UNESCO World Heritage Site housing the mortal remains of St. Francis Xavier.", link: "https://maps.google.com/?q=Basilica+of+Bom+Jesus+Goa", image: "/places/churches/bom-jesus.jpg" },
-  { title: "Netravali Bubbling Lake", category: "Waterfalls", description: "A curious sacred lake where natural bubbles rise through clear water in a forest setting.", link: "https://maps.google.com/?q=Netravali+Bubbling+Lake+Goa", image: "/places/waterfalls/netravali.jpg" },
-  { title: "Dudhsagar Falls", category: "Waterfalls", description: "A spectacular four-tiered waterfall that turns the forest drive into a true adventure.", link: "https://maps.google.com/?q=Dudhsagar+Falls+Goa", image: "/places/waterfalls/dudhsagar.jpg" },
-  { title: "Shivling Waterfall", category: "Waterfalls", description: "A serene forest waterfall ideal for nature lovers seeking a quieter Goan detour.", link: "https://maps.google.com/?q=Shivling+Waterfall+Goa", image: "/places/waterfalls/shivling.jpg" },
-  { title: "Club Tito's", category: "Nightlife", description: "A legendary Baga nightlife stop with dance floors, DJs, and high-energy party nights.", link: "https://maps.google.com/?q=Club+Tito's+Goa", image: "/places/nightlife/titos.jpg" },
-  { title: "Hammerzz Nightclub", category: "Nightlife", description: "A stylish clubbing destination known for premium sound, sleek interiors, and big weekend crowds.", link: "https://maps.google.com/?q=Hammerzz+Nightclub+Goa", image: "/places/nightlife/hammerzz.jpg" },
-  { title: "SinQ Night Club", category: "Nightlife", description: "A chic Candolim party spot with poolside energy, cocktails, music, and late-night dancing.", link: "https://maps.google.com/?q=SinQ+Night+Club+Goa", image: "/places/nightlife/sinq.jpg" },
-  { title: "The Southern Deck", category: "Nightlife", description: "A beachfront favourite for sunset drinks, coastal dining, and relaxed South Goa evenings.", link: "https://maps.google.com/?q=The+Southern+Deck+Goa", image: "/places/nightlife/southern-deck.jpg" },
-  { title: "Las Olas", category: "Nightlife", description: "A lively beach club atmosphere with music, cocktails, and breezy nights by the sea.", link: "https://maps.google.com/?q=Las+Olas+Goa", image: "/places/nightlife/las-olas.jpg" },
-  { title: "Hammerzz Makarena", category: "Nightlife", description: "A premium nightlife venue made for late dinners, music, cocktails, and celebration nights.", link: "https://maps.google.com/?q=Hammerzz+Makarena+Goa", image: "/places/nightlife/hammerzz-makarena.jpg" },
-  { title: "Romeo Lane", category: "Nightlife", description: "A trendy dining and party address with upbeat music, dramatic views, and vibrant evenings.", link: "https://maps.google.com/?q=Romeo+Lane+Goa", image: "/places/nightlife/romeo-lane.jpg" },
-  { title: "Big Daddy Casino", category: "Casinos", description: "A premium floating casino experience with gaming floors, live entertainment, and river views.", link: "https://maps.google.com/?q=Big+Daddy+Casino+Goa", image: "/places/casinos/big-daddy.jpg" },
-  { title: "Goa Karting", category: "Adventure", description: "A fun track stop for quick laps, friendly competition, and an adrenaline break from beaches.", link: "https://maps.google.com/?q=Goa+Karting+Goa", image: "/places/adventure/goa-karting.jpg" },
-  { title: "Gforce GoKarting", category: "Adventure", description: "A fast-paced go-karting arena for groups, families, and travellers chasing a quick thrill.", link: "https://maps.google.com/?q=Gforce+GoKarting+Goa", image: "/places/adventure/gforce-gokarting.jpg" },
+  { title: "Butterfly Beach", category: "Beaches", description: "A hidden cove framed by forested cliffs, perfect for quiet swims and sunset views.", link: "https://maps.google.com/?q=Butterfly+Beach+Goa", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Butterfly_Beach_Park_201207.jpg/960px-Butterfly_Beach_Park_201207.jpg" },
+  { title: "Cabo De Rama Beach", category: "Beaches", description: "A peaceful South Goa shoreline below dramatic cliffs and old Portuguese history.", link: "https://maps.google.com/?q=Cabo+De+Rama+Beach+Goa", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS42FenRBhlXlueqDIsbqNc5E9r_vD5JkCaDA&s" },
+  { title: "Varca Beach", category: "Beaches", description: "Soft white sand, calm waves, and a relaxed coastal stretch made for slow beach days.", link: "https://maps.google.com/?q=Varca+Beach+Goa", image: "https://im.whatshot.in/img/2020/Jan/varca2-1579336681.jpg" },
+  { title: "Benaulim Beach", category: "Beaches", description: "A laid-back beach village with golden sands, seafood shacks, and gentle evening walks.", link: "https://maps.google.com/?q=Benaulim+Beach+Goa", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_CWce0WRuNQCmu3nNJxar4W1X3_RMrzLlcQ&s" },
+  { title: "Calangute Beach", category: "Beaches", description: "Goa's classic beach hub, buzzing with water sports, shacks, shopping, and nightlife.", link: "https://maps.google.com/?q=Calangute+Beach+Goa", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOc9HGDu1nv8LH19A68lbLXg15YqBLEYFb9KmIOQM1q9TqhiPXGlUdXApw&s=10" },
+  { title: "Keri Beach", category: "Beaches", description: "A quiet northern escape with wide sands, palm-lined roads, and peaceful sea views.", link: "https://maps.google.com/?q=Keri+Beach+Goa", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ71hASMQiQObJk8-GJZ2O8LCX8FjmJH5O_p6SeNDCXFfGNQQW0AZPNQo4&s=10" },
+  { title: "Arambol Beach", category: "Beaches", description: "A free-spirited coastline loved for music, markets, sunset circles, and cliffside cafes.", link: "https://maps.google.com/?q=Arambol+Beach+Goa", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWF5QLsCJkzBm9aic7fkWbDEAV6DmKp253CrUYfL7wxw&s=10" },
+  { title: "Fort Aguada", category: "Forts", description: "A 17th-century Portuguese fort with a panoramic lighthouse overlooking the sea.", link: "https://maps.google.com/?q=Fort+Aguada+Goa", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRov64WELvGb92ik81Eb80TXWEuI9_hHJCcMV4lAlR068xIMPFRBrY1uLTl&s=10" },
+  { title: "Tiracol Fort", category: "Forts", description: "A northern cliff-top fort with sweeping sea views and a ferry ride full of charm.", link: "https://maps.google.com/?q=Tiracol+Fort+Goa", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlberXjxyNFcS2u4YQtAWfmPOTx2y7ZTzdwg&s" },
+  { title: "New Zuari Bridge", category: "Landmarks", description: "A striking modern landmark with panoramic river views and a memorable coastal drive.", link: "https://maps.google.com/?q=New+Zuari+Bridge+Goa", image: "https://www.99acres.com/microsite/articles/files/2024/01/New-Zuari-Bridge.jpg" },
+  { title: "Our Lady of the Immaculate Conception Church", category: "Churches", description: "Panaji's iconic white church, known for its grand staircase and postcard-perfect facade.", link: "https://maps.google.com/?q=Our+Lady+of+the+Immaculate+Conception+Church+Goa", image: "https://www.tourmyindia.com/states/goa/image/our-lady-of-immaculate-conception-church-goa.webp" },
+  { title: "Basilica of Bom Jesus", category: "Churches", description: "A UNESCO World Heritage Site housing the mortal remains of St. Francis Xavier.", link: "https://maps.google.com/?q=Basilica+of+Bom+Jesus+Goa", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Front_Elevation_of_Basilica_of_Bom_Jesus.jpg/960px-Front_Elevation_of_Basilica_of_Bom_Jesus.jpg" },
+  { title: "Netravali Bubbling Lake", category: "Waterfalls", description: "A curious sacred lake where natural bubbles rise through clear water in a forest setting.", link: "https://maps.google.com/?q=Netravali+Bubbling+Lake+Goa", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ8P_A3l7P0HbM2u9sT9w79NIUbE5v3CHXCg&s" },
+  { title: "Dudhsagar Falls", category: "Waterfalls", description: "A spectacular four-tiered waterfall that turns the forest drive into a true adventure.", link: "https://maps.google.com/?q=Dudhsagar+Falls+Goa", image: "https://dudhsagar-falls.com/wp-content/uploads/2017/10/dudhsagar-falls-india.jpg" },
+  { title: "Shivling Waterfall", category: "Waterfalls", description: "A serene forest waterfall ideal for nature lovers seeking a quieter Goan detour.", link: "https://maps.google.com/?q=Shivling+Waterfall+Goa", image: "https://visitsgoa.in/wp-content/uploads/2024/04/IMG_3795.jpeg" },
+  { title: "Club Tito's", category: "Nightlife", description: "A legendary Baga nightlife stop with dance floors, DJs, and high-energy party nights.", link: "https://maps.google.com/?q=Club+Tito's+Goa", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKvdzYxnTvUUGOqkDQoNtnQSAA0Efpq8CjzA&s" },
+  { title: "Hammerzz Nightclub", category: "Nightlife", description: "A stylish clubbing destination known for premium sound, sleek interiors, and big weekend crowds.", link: "https://maps.google.com/?q=Hammerzz+Nightclub+Goa", image: "https://content3.jdmagicbox.com/comp/goa/k3/0832px832.x832.191016213122.j9k3/catalogue/hammerzz-goa-baga-goa-night-clubs-j17z1atm5j.jpg" },
+  { title: "SinQ Night Club", category: "Nightlife", description: "A chic Candolim party spot with poolside energy, cocktails, music, and late-night dancing.", link: "https://maps.google.com/?q=SinQ+Night+Club+Goa", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMSX2XtQDe3DyHecO1voEszzvBSn3WCEAzmg&s" },
+  { title: "The Southern Deck", category: "Nightlife", description: "A beachfront favourite for sunset drinks, coastal dining, and relaxed South Goa evenings.", link: "https://maps.google.com/?q=The+Southern+Deck+Goa", image: "https://dineout-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/DINEOUT_ALL_RESTAURANTS/IMAGES/RESTAURANT_IMAGE_SERVICE/2025/4/15/43cbed4b-c57b-4d4e-8ac8-312a95c698d3_image47bc9af2b791554991a5e335e4b2652c3c.JPG" },
+  { title: "Las Olas", category: "Nightlife", description: "A lively beach club atmosphere with music, cocktails, and breezy nights by the sea.", link: "https://maps.google.com/?q=Las+Olas+Goa", image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/d3/a4/fe/getlstd-property-photo.jpg?w=900&h=500&s=1" },
+  { title: "Hammerzz Makarena", category: "Nightlife", description: "A premium nightlife venue made for late dinners, music, cocktails, and celebration nights.", link: "https://maps.google.com/?q=Hammerzz+Makarena+Goa", image: "https://d3fphkxyf5o5bm.cloudfront.net/image-resize/format=webp,w=720/1PaZQcsOXDkMXbrrUKQaVFwa1UDzoDkRMeUd" },
+  { title: "Romeo Lane", category: "Nightlife", description: "A trendy dining and party address with upbeat music, dramatic views, and vibrant evenings.", link: "https://maps.google.com/?q=Romeo+Lane+Goa", image: "https://dineout-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/v1710741783/f6e026836e6e4ba5158ca660bbd8c292.png" },
+  { title: "Big Daddy Casino", category: "Casinos", description: "A premium floating casino experience with gaming floors, live entertainment, and river views.", link: "https://maps.google.com/?q=Big+Daddy+Casino+Goa", image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/84/a4/a0/nestled-on-the-mandovi.jpg?w=900&h=500&s=1" },
+  { title: "Goa Karting", category: "Adventure", description: "A fun track stop for quick laps, friendly competition, and an adrenaline break from beaches.", link: "https://maps.google.com/?q=Goa+Karting+Goa", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJYBHDmXo8ax-O_ifZNptDsbZZB_XSZqvUSQ&s" },
+  { title: "Gforce GoKarting", category: "Adventure", description: "A fast-paced go-karting arena for groups, families, and travellers chasing a quick thrill.", link: "https://maps.google.com/?q=Gforce+GoKarting+Goa", image: "https://content.jdmagicbox.com/v2/comp/goa/i2/0832px832.x832.240117125329.p3i2/catalogue/gforce-gokarting-anjuna-goa-go-karting-clubs-2sud0en14s.jpg" },
 ];
 
 const heritageSections = [
@@ -771,64 +771,53 @@ Thankyou`;
                 control={form.control}
                 name="carId"
                 render={({ field }) => {
-                  const filteredCars = carsData.filter((car: CarItem) =>
-                    car.name.toLowerCase().includes(carSearchText.toLowerCase()) ||
-                    car.category.toLowerCase().includes(carSearchText.toLowerCase())
-                  );
-                  const selectedCarObj = carsData.find((c: CarItem) => c.id === field.value);
-                  return (
+  const selectedCarObj = carsData.find(
+    (c: CarItem) => c.id === field.value
+  );
+
+  const filteredCars = carsData.filter((car: CarItem) =>
+    car.name.toLowerCase().includes(carSearchText.toLowerCase()) ||
+    car.category.toLowerCase().includes(carSearchText.toLowerCase())
+  );
+
+  return (
                     <FormItem>
                       <FormLabel className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-medium">Select Car (optional)</FormLabel>
                       <FormControl>
                         <div className="mt-2 relative">
                          <Input
   placeholder="Search cars..."
-  value={carSearchText}
+  value={field.value ? selectedCarObj?.name || "" : carSearchText}
   onFocus={() => setShowCarDropdown(true)}
   onBlur={() => {
     setTimeout(() => setShowCarDropdown(false), 200);
   }}
-  onChange={(e) => {
-    setCarSearchText(e.target.value);
-    setShowCarDropdown(true);
-  }}
+ 
   className="bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40 h-10"
 />
-                          {showCarDropdown && filteredCars.length > 0 && (
-                            <div className="absolute top-full left-0 right-0 bg-neutral-900 border border-white/10 border-t-0 max-h-48 overflow-y-auto z-50">
-                              {filteredCars.map((car: CarItem) => (
-                                <button
-                                  key={car.id}
-                                  type="button"
-                                  onClick={() => {
-                                  field.onChange(car.id);
-                                  setCarSearchText(car.name);
-                                  setShowCarDropdown(false);
-                                  }}
-                                  className="w-full text-left px-3 py-2 text-sm text-white hover:bg-white/10 border-b border-white/5 last:border-0"
-                                >
-                                  {car.name} <span className="text-white/40">- ₹{car.pricing[0].price.toLocaleString("en-IN")}</span>
-                                </button>
-                              ))}
-                            </div>
-                          )}
-                          {selectedCarObj && (
-  <div className="mt-2 flex items-center justify-between p-2 bg-white/5 border border-white/10 rounded text-sm text-white">
-    <span>✓ {selectedCarObj.name}</span>
-
-    <button
-      type="button"
-      onClick={() => {
-        field.onChange("");
-        setCarSearchText("");
-        setShowCarDropdown(false);
-      }}
-      className="text-white/50 hover:text-white"
-    >
-      ✕
-    </button>
+                        {showCarDropdown && filteredCars.length > 0 && (
+  <div className="absolute top-full left-0 right-0 bg-neutral-900 border border-white/10 border-t-0 max-h-48 overflow-y-auto z-50">
+    {filteredCars.map((car: CarItem) => (
+      <button
+        key={car.id}
+        type="button"
+        className="block w-full text-left px-3 py-2 text-sm text-white hover:bg-white/10 border-b border-white/5 last:border-0"
+        onClick={() => {
+  field.onChange(car.id);
+  setCarSearchText(car.name);
+  setShowCarDropdown(false);
+}}
+      >
+        {car.name}
+        <span className="text-white/40">
+          {" "}
+          - ₹{car.pricing[0].price.toLocaleString("en-IN")}
+        </span>
+      </button>
+    ))}
   </div>
 )}
+                         
                         </div>
                       </FormControl>
                       <FormMessage className="text-xs mt-1" />
@@ -848,7 +837,12 @@ Thankyou`;
                       <FormControl>
                         <div className="mt-2 relative">
                           <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/30" />
-                          <Input data-testid="input-pickup" placeholder="Airport / Hotel" className="pl-9 bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40 h-10" {...field} />
+                          <Input
+  data-testid="input-pickup"
+  placeholder="Airport / Hotel"
+  className="pl-9 bg-white/5 border-white/10 text-white placeholder:text-white/20 rounded-none focus-visible:ring-0 focus-visible:border-white/40 h-10"
+  {...field}
+/>
                         </div>
                       </FormControl>
                       <FormMessage className="text-xs mt-1" />
