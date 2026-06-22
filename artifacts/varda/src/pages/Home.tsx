@@ -5,6 +5,7 @@ import { MapPin, X, Menu, ArrowUpRight, ChevronDown, Users, Fuel, Settings2, Ext
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { MessageCircle } from "lucide-react";
 import { Link } from "wouter";
 
 import { Button } from "@/components/ui/button";
@@ -475,8 +476,8 @@ Thankyou`;
             transition={{ duration: 1, delay: 0.2 }}
             className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif font-medium leading-[1.0] tracking-tight text-white max-w-3xl mb-6"
           >
-            Rent a Cab in Goa<br />
-            with Premium Self-Drive Car Rentals.
+            Discover Goa<br />
+            with Varda Car Rental.
           </motion.h1>
 
           {/* Subtitle */}
@@ -511,6 +512,15 @@ Thankyou`;
             >
               Explore Fleet
             </button>
+            <a
+ href="https://wa.me/919371548253?text=Hello%20Varda%20Car%20Rentals,%20I%20am%20interested%20in%20booking%20a%20car.%20Please%20share%20the%20available%20options."
+  target="_blank"
+  rel="noopener noreferrer"
+  className="flex items-center gap-3 bg-green-600 text-white text-[11px] uppercase tracking-[0.2em] font-medium px-7 py-3.5 rounded-sm hover:bg-green-700 transition-all duration-300"
+>
+  <MessageCircle size={14} />
+  WhatsApp Us
+</a>
           </motion.div>
         </motion.div>
 
