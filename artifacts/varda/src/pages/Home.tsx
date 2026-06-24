@@ -345,7 +345,7 @@ Thankyou`;
           "@context": "https://schema.org",
           "@type": "CarRental",
           name: "Varda Car Rentals",
-          url: "https://varda.example.com/",
+          url: "https://loyalcarrent.com/",
           description: "Premium cab rental and self-drive car hire in Goa for airport transfers, sightseeing, beach trips, and wedding travel.",
           areaServed: ["Goa", "North Goa", "South Goa", "Dabolim Airport", "Panaji"],
           telephone: "+91-9371548253",
